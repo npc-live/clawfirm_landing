@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     );
 
     const res = NextResponse.json({ ok: true });
-    res.headers.set("Set-Cookie", sessionCookie(token));
+    res.headers.set("Set-Cookie", sessionCookie(token, req.headers.get("host")));
     return res;
   } catch {
     return NextResponse.json({ error: "服务器错误" }, { status: 500 });

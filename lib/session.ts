@@ -38,12 +38,25 @@ export async function verifySession(
   }
 }
 
-export function sessionCookie(token: string): string {
-  return `${COOKIE_NAME}=${token}; HttpOnly; Secure; SameSite=Lax; Max-Age=${MAX_AGE}; Path=/`;
+function cookieDomainForHost(host: string | null): string {
+  if (!host) return "";
+  const h = host.split(":")[0].toLowerCase();
+  // Don't set Domain for localhost or IPs.
+  if (h === "localhost" || /^\d+\.\d+\.\d+\.\d+$/.test(h)) return "";
+  // Use host-only cookie by default; set domain only for apex + subdomains if needed.
+  // For clawfirm.dev we want it available across www/other subdomains.
+  if (h === "clawfirm.dev" || h.endsWith(".clawfirm.dev")) return "Domain=.clawfirm.dev; ";
+  return "";
 }
 
-export function clearSessionCookie(): string {
-  return `${COOKIE_NAME}=; HttpOnly; Secure; SameSite=Lax; Max-Age=0; Path=/`;
+export function sessionCookie(token: string, host?: string | null): string {
+  const domain = cookieDomainForHost(host ?? null);
+  return `${COOKIE_NAME}=${token}; ${domain}HttpOnly; Secure; SameSite=Lax; Max-Age=${MAX_AGE}; Path=/`;
+}
+
+export function clearSessionCookie(host?: string | null): string {
+  const domain = cookieDomainForHost(host ?? null);
+  return `${COOKIE_NAME}=; ${domain}HttpOnly; Secure; SameSite=Lax; Max-Age=0; Path=/`;
 }
 
 export function getTokenFromCookies(cookieHeader: string | null): string | null {
