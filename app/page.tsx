@@ -1,0 +1,419 @@
+const zh = {
+  badge: "一人公司AI合伙人",
+  heroTitle: "一人公司的AI合伙人",
+  heroSub: "专为新时代个体创业者打造。ClawFirm 作为你的 AI 合伙人，深度嵌入商业全链路，让一个人也能拥有一座工厂的战斗力，完成从创意到现金流的完整商业闭环。",
+  heroCta: "立即开始",
+  heroLearn: "了解更多",
+  featuresLabel: "核心能力",
+  featuresTitle: "AI合伙人帮你赚钱",
+  featuresSub: "三大变现路径，AI 全程出力",
+  f1Title: "全栈软件出海",
+  f1Desc: "从深度用户调研、功能构建到自动化营销，AI 帮你像一支完整团队一样打造并分发软件产品，通过真实付费反馈快速迭代。",
+  f2Title: "自动化套利交易",
+  f2Desc: "利用 AI 敏锐捕捉市场信号，通过算法实现高效率的交易获利，让资产在自动化流程中稳健增值。",
+  f3Title: "自媒体矩阵分发",
+  f3Desc: "针对不同平台特征，AI 自动生成高转化内容并精准投喂流量，让你的个人品牌和产品实现全网裂变。",
+  deployTitle: "专业用户？自己动手",
+  deploySub: "5 分钟内从零到运行，无需付费",
+  s1Title: "安装 WhipFlow CLI",
+  s1Desc: "全局安装命令行工具，需要 Node 18+",
+  s2Title: "编写工作流",
+  s2Desc: "用纯文本定义步骤、变量和技能调用，无需样板代码",
+  s3Title: "运行并观察",
+  s3Desc: "运行时解析变量、按顺序调用技能，完整日志可观测",
+  s4Title: "迭代与部署",
+  s4Desc: "更换模型或调整 prompt，工作流合约保持一致",
+  deployCta: "查看完整文档 →",
+  pricingBadge: "一次付费 · 终身受益",
+  pricingTitle: "专业部署服务",
+  pricingPrice: "¥999",
+  pricingUnit: "一次性",
+  pricingDesc: "完整安装部署 + 配置指导",
+  pf1: "远程一对一环境配置",
+  pf2: "全部核心模块安装部署",
+  pf3: "个性化工作流配置",
+  pf4: "30 天技术支持保障",
+  pricingCta: "立即购买部署服务",
+  contactTitle: "扫码咨询",
+  contactSub: "添加微信，了解更多详情",
+  contactWechat: "微信号: PpCiting",
+  ctaHeadline: "准备好让AI合伙人为你赚钱了吗？",
+  ctaSub: "无需技术背景，一次付费，专属配置，永久使用",
+  ctaBtn: "立即开始",
+  ctaNote: "30 天技术支持 · 无隐藏费用",
+  footer: "消除技术壁垒，释放个体潜能。",
+};
+
+const en = {
+  badge: "Your AI Business Partner",
+  heroTitle: "The AI Partner for One Person Companies",
+  heroSub: "ClawFirm acts as your AI partner, deeply integrated into every aspect of your business — empowering one person to have the firepower of an entire factory, from idea to cash flow.",
+  heroCta: "Get Started",
+  heroLearn: "Learn More",
+  featuresLabel: "Core Capabilities",
+  featuresTitle: "Your AI Partner Makes You Money",
+  featuresSub: "Three profit paths, AI does the heavy lifting",
+  f1Title: "Full-Stack Software Export",
+  f1Desc: "From deep user research, feature development to automated marketing, AI helps you build and distribute software products like a complete team.",
+  f2Title: "Automated Arbitrage Trading",
+  f2Desc: "Leverage AI to capture market signals with precision, achieving efficient trading profits through algorithms.",
+  f3Title: "Social Media Matrix",
+  f3Desc: "AI automatically generates high-converting content tailored to different platforms and precisely delivers traffic, enabling viral growth.",
+  deployTitle: "Power User? DIY",
+  deploySub: "From zero to running in under 5 minutes, free",
+  s1Title: "Install WhipFlow CLI",
+  s1Desc: "Install the CLI globally with npm. Requires Node 18+",
+  s2Title: "Write Your Workflow",
+  s2Desc: "Define steps, variables, and skill calls in plain text. No boilerplate",
+  s3Title: "Run & Observe",
+  s3Desc: "Runtime resolves variables, calls skills in order, full observability",
+  s4Title: "Iterate & Deploy",
+  s4Desc: "Swap models or tweak prompts — the workflow contract stays identical",
+  deployCta: "View Full Docs →",
+  pricingBadge: "One-Time Payment · Lifetime Value",
+  pricingTitle: "Professional Deployment",
+  pricingPrice: "¥999",
+  pricingUnit: "one-time",
+  pricingDesc: "Complete Installation & Configuration Guidance",
+  pf1: "Remote 1-on-1 Environment Setup",
+  pf2: "All Core Modules Deployment",
+  pf3: "Personalized Workflow Configuration",
+  pf4: "30-Day Technical Support",
+  pricingCta: "Purchase Deployment Service",
+  contactTitle: "Add on WeChat",
+  contactSub: "Scan to connect and learn more",
+  contactWechat: "WeChat: PpCiting",
+  ctaHeadline: "Ready to Let Your AI Partner Make You Money?",
+  ctaSub: "No technical background needed. One-time payment, custom setup, lifetime access.",
+  ctaBtn: "Get Started Now",
+  ctaNote: "30-day support · No hidden fees",
+  footer: "Breaking down technical barriers, unleashing individual potential.",
+};
+
+// Client-side i18n — no React state, works with static HTML
+const i18nScript = `
+(function(){
+  function apply(lang) {
+    document.querySelectorAll('[data-zh]').forEach(function(el){
+      el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      var active = btn.getAttribute('data-lang') === lang;
+      btn.style.border = active ? '1px solid rgba(255,255,255,0.25)' : '1px solid transparent';
+      btn.style.background = active ? 'rgba(255,255,255,0.1)' : 'transparent';
+      btn.style.backdropFilter = active ? 'blur(12px)' : 'none';
+      btn.style.color = active ? 'rgb(240,237,229)' : 'rgba(255,255,255,0.5)';
+    });
+    localStorage.setItem('cf_lang', lang);
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    // Attach click handlers
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ apply(btn.getAttribute('data-lang')); });
+    });
+    // Apply saved or default lang
+    apply(localStorage.getItem('cf_lang') || 'zh');
+  });
+})();
+`;
+
+function T({ zh: z, en: e }: { zh: string; en: string }) {
+  return <span data-zh={z} data-en={e}>{z}</span>;
+}
+
+export default function Home() {
+  const t = zh;
+
+  return (
+    <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
+      <script dangerouslySetInnerHTML={{ __html: i18nScript }} />
+
+      {/* ── Decorative blobs ── */}
+      <div aria-hidden style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(38,136,249,0.18) 0%, transparent 70%)", filter: "blur(60px)", top: "-200px", left: "-200px" }} />
+        <div style={{ position: "absolute", width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(120,60,200,0.14) 0%, transparent 70%)", filter: "blur(80px)", top: "30%", right: "-150px" }} />
+        <div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(38,136,249,0.10) 0%, transparent 70%)", filter: "blur(100px)", bottom: "0px", left: "30%" }} />
+      </div>
+
+      {/* ── Floating Nav ── */}
+      <nav className="cf-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 48px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Playfair Display', Georgia, serif", fontSize: "22px", fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+          <span style={{ fontSize: "26px" }}>🦞</span>
+          ClawFirm
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          {(["zh", "en"] as const).map((l) => (
+            <button
+              key={l}
+              data-lang={l}
+              className="lang-btn"
+              style={{ padding: "6px 16px", borderRadius: "100px", border: "1px solid transparent", background: "transparent", color: "var(--text-muted)", fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", fontWeight: 500, cursor: "pointer", transition: "all 0.2s", letterSpacing: "0.04em" }}
+            >
+              {l === "zh" ? "中文" : "EN"}
+            </button>
+          ))}
+          <a href="/login" style={{ padding: "7px 18px", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.15)", background: "transparent", color: "var(--text-muted)", fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", fontWeight: 500, textDecoration: "none", letterSpacing: "0.04em" }}>登录</a>
+          <a href="/register" style={{ padding: "7px 18px", borderRadius: "100px", border: "none", background: "#2688f9", color: "white", fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", fontWeight: 600, textDecoration: "none", letterSpacing: "0.04em", boxShadow: "0 2px 12px rgba(38,136,249,0.4)" }}>注册</a>
+        </div>
+      </nav>
+
+      {/* ══ HERO ══ */}
+      <section style={{ position: "relative", width: "100vw", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", zIndex: 1 }}>
+        <div style={{ position: "absolute", inset: 0, zIndex: 1, background: "linear-gradient(to bottom, rgba(34,34,34,0.3) 0%, rgba(34,34,34,0.1) 50%, rgba(34,34,34,0.6) 100%)" }} />
+        <div className="cf-hero-content" style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "80px 24px 0", maxWidth: "900px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "6px 18px", background: "rgba(38,136,249,0.15)", border: "1px solid rgba(38,136,249,0.3)", borderRadius: "100px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "12px", fontWeight: 500, color: "#2688f9", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "40px", backdropFilter: "blur(12px)" }}>
+            ✦ <T zh={t.badge} en={en.badge} />
+          </div>
+          <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(48px, 8vw, 96px)", fontWeight: 700, fontStyle: "italic", letterSpacing: "-0.03em", lineHeight: 1.05, color: "rgba(255,255,255,0.95)", marginBottom: "32px" }}>
+            <T zh={t.heroTitle} en={en.heroTitle} />
+          </h1>
+          <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "clamp(16px, 2vw, 20px)", lineHeight: 1.75, color: "var(--text-secondary)", maxWidth: "640px", margin: "0 auto 48px" }}>
+            <T zh={t.heroSub} en={en.heroSub} />
+          </p>
+          <div className="cf-hero-cta" style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+            <a href="/register" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "14px 36px", background: "#2688f9", color: "white", borderRadius: "12px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "15px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 24px rgba(38,136,249,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
+              <T zh={t.heroCta} en={en.heroCta} /> →
+            </a>
+            <a href="#features" style={{ display: "inline-flex", alignItems: "center", padding: "14px 32px", background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.15)", color: "var(--text-primary)", borderRadius: "12px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "15px", fontWeight: 500, textDecoration: "none" }}>
+              <T zh={t.heroLearn} en={en.heroLearn} />
+            </a>
+          </div>
+        </div>
+        <div style={{ position: "absolute", bottom: "36px", left: "50%", transform: "translateX(-50%)", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.4)", fontFamily: "Inter, system-ui, sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", animation: "bounce 2s ease-in-out infinite" }}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          scroll
+        </div>
+      </section>
+
+      {/* ══ FEATURES ══ */}
+      <section id="features" style={{ position: "relative", zIndex: 1, padding: "120px 24px 100px" }}>
+        <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#2688f9", marginBottom: "16px" }}>
+            <T zh={t.featuresLabel} en={en.featuresLabel} />
+          </p>
+          <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 700, fontStyle: "italic", letterSpacing: "-0.02em", lineHeight: 1.15, color: "var(--text-primary)", marginBottom: "16px" }}>
+            <T zh={t.featuresTitle} en={en.featuresTitle} />
+          </h2>
+          <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "18px", lineHeight: 1.75, color: "var(--text-secondary)", maxWidth: "480px", margin: "0 auto" }}>
+            <T zh={t.featuresSub} en={en.featuresSub} />
+          </p>
+        </div>
+        <div className="cf-features-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2px", maxWidth: "1100px", margin: "0 auto", border: "1px solid var(--border-default)", borderRadius: "24px", overflow: "hidden" }}>
+          {([
+            { icon: "🚀", zh: t.f1Title, en: en.f1Title, descZh: t.f1Desc, descEn: en.f1Desc, accent: "rgba(38,136,249,0.15)" },
+            { icon: "📈", zh: t.f2Title, en: en.f2Title, descZh: t.f2Desc, descEn: en.f2Desc, accent: "rgba(120,60,200,0.15)" },
+            { icon: "🌐", zh: t.f3Title, en: en.f3Title, descZh: t.f3Desc, descEn: en.f3Desc, accent: "rgba(38,136,249,0.10)" },
+          ] as const).map((f) => (
+            <div key={f.icon} style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", padding: "44px 36px", display: "flex", flexDirection: "column", gap: "16px", borderRight: "1px solid var(--border-subtle)" }}>
+              <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: f.accent, border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>{f.icon}</div>
+              <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "22px", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.25 }}>
+                <T zh={f.zh} en={f.en} />
+              </h3>
+              <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "15px", lineHeight: 1.75, color: "var(--text-secondary)" }}>
+                <T zh={f.descZh} en={f.descEn} />
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ DEPLOY STEPS ══ */}
+      <section id="deploy" style={{ position: "relative", zIndex: 1, padding: "80px 24px 100px" }}>
+        <div style={{ textAlign: "center", marginBottom: "56px" }}>
+          <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, fontStyle: "italic", letterSpacing: "-0.02em", lineHeight: 1.15, color: "var(--text-primary)", marginBottom: "12px" }}>
+            <T zh={t.deployTitle} en={en.deployTitle} />
+          </h2>
+          <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "17px", color: "var(--text-secondary)" }}>
+            <T zh={t.deploySub} en={en.deploySub} />
+          </p>
+        </div>
+        <div className="cf-steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px", maxWidth: "1100px", margin: "0 auto 40px" }}>
+          {([
+            { n: "01", zh: t.s1Title, en: en.s1Title, descZh: t.s1Desc, descEn: en.s1Desc, code: "npm install -g @harness.farm/whipflow" },
+            { n: "02", zh: t.s2Title, en: en.s2Title, descZh: t.s2Desc, descEn: en.s2Desc, code: "touch my-workflow.whip" },
+            { n: "03", zh: t.s3Title, en: en.s3Title, descZh: t.s3Desc, descEn: en.s3Desc, code: "whipflow run my-workflow.whip" },
+            { n: "04", zh: t.s4Title, en: en.s4Title, descZh: t.s4Desc, descEn: en.s4Desc, code: "whipflow config set model claude-sonnet-4-6" },
+          ] as const).map((s) => (
+            <div key={s.n} style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "20px", padding: "32px 28px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)" }}>
+              <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "36px", fontWeight: 900, fontStyle: "italic", color: "#2688f9", opacity: 0.7, marginBottom: "12px", letterSpacing: "-0.02em" }}>{s.n}</div>
+              <h4 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "18px", fontWeight: 600, color: "var(--text-primary)", marginBottom: "8px" }}>
+                <T zh={s.zh} en={s.en} />
+              </h4>
+              <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: "16px" }}>
+                <T zh={s.descZh} en={s.descEn} />
+              </p>
+              <div style={{ background: "rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", padding: "10px 14px", fontFamily: "'Monaco', 'Menlo', monospace", fontSize: "12px", color: "#2688f9", overflowX: "auto" }}>{s.code}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <a href="https://harness.farm" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", padding: "12px 28px", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "10px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "14px", fontWeight: 500, color: "var(--text-secondary)", textDecoration: "none" }}>
+            <T zh={t.deployCta} en={en.deployCta} />
+          </a>
+        </div>
+      </section>
+
+      {/* ══ PRICING + CONTACT ══ */}
+      <section id="pricing" style={{ position: "relative", zIndex: 1, padding: "80px 24px 100px" }}>
+        <div className="cf-pricing-grid" style={{ maxWidth: "1000px", margin: "0 auto", display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "24px", alignItems: "start" }}>
+          {/* Pricing */}
+          <div style={{ background: "rgba(38,136,249,0.08)", backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid rgba(38,136,249,0.2)", borderRadius: "28px", padding: "48px 44px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 32px 80px rgba(0,0,0,0.3)", position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, rgba(38,136,249,0.6), transparent)" }} />
+            <div style={{ display: "inline-block", padding: "6px 20px", background: "rgba(38,136,249,0.2)", border: "1px solid rgba(38,136,249,0.3)", borderRadius: "100px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "12px", fontWeight: 600, color: "#2688f9", letterSpacing: "0.04em", marginBottom: "24px" }}>
+              <T zh={t.pricingBadge} en={en.pricingBadge} />
+            </div>
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "30px", fontWeight: 700, fontStyle: "italic", color: "var(--text-primary)", marginBottom: "12px" }}>
+              <T zh={t.pricingTitle} en={en.pricingTitle} />
+            </h3>
+            <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "52px", fontWeight: 900, color: "var(--text-primary)", marginBottom: "4px", letterSpacing: "-0.03em" }}>
+              {t.pricingPrice}
+              <span style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "18px", fontWeight: 400, color: "var(--text-muted)", marginLeft: "8px" }}>
+                <T zh={t.pricingUnit} en={en.pricingUnit} />
+              </span>
+            </div>
+            <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "15px", color: "var(--text-secondary)", marginBottom: "28px" }}>
+              <T zh={t.pricingDesc} en={en.pricingDesc} />
+            </p>
+            <ul style={{ listStyle: "none", marginBottom: "36px" }}>
+              {([
+                [t.pf1, en.pf1], [t.pf2, en.pf2], [t.pf3, en.pf3], [t.pf4, en.pf4],
+              ] as [string, string][]).map(([z, e]) => (
+                <li key={z} style={{ display: "flex", alignItems: "baseline", gap: "12px", padding: "12px 0", borderBottom: "1px solid rgba(255,255,255,0.06)", fontFamily: "'Lora', Georgia, serif", fontSize: "15px", color: "var(--text-primary)" }}>
+                  <span style={{ width: "20px", height: "20px", flexShrink: 0, background: "rgba(38,136,249,0.2)", border: "1px solid rgba(38,136,249,0.3)", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "11px", color: "#2688f9", fontWeight: 700 }}>✓</span>
+                  <T zh={z} en={e} />
+                </li>
+              ))}
+            </ul>
+            <button style={{ width: "100%", padding: "16px 24px", background: "#2688f9", color: "white", border: "none", borderRadius: "14px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 24px rgba(38,136,249,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
+              <T zh={t.pricingCta} en={en.pricingCta} />
+            </button>
+          </div>
+
+          {/* Contact — real QR image */}
+          <div style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "28px", padding: "44px 36px", textAlign: "center", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12)" }}>
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "26px", fontWeight: 700, fontStyle: "italic", color: "var(--text-primary)", marginBottom: "8px" }}>
+              <T zh={t.contactTitle} en={en.contactTitle} />
+            </h3>
+            <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "14px", color: "var(--text-secondary)", marginBottom: "24px" }}>
+              <T zh={t.contactSub} en={en.contactSub} />
+            </p>
+            {/* Real WeChat QR image */}
+            <div style={{ background: "white", padding: "12px", borderRadius: "16px", display: "inline-block", marginBottom: "20px", boxShadow: "0 8px 32px rgba(0,0,0,0.3)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/wechat.jpg"
+                alt="WeChat QR Code — PpCiting"
+                style={{ width: "180px", height: "180px", objectFit: "cover", borderRadius: "8px", display: "block" }}
+              />
+            </div>
+            <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "14px", color: "var(--text-secondary)", letterSpacing: "0.02em" }}>
+              <T zh={t.contactWechat} en={en.contactWechat} />
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ CTA ══ */}
+      <section style={{ position: "relative", zIndex: 1, padding: "100px 24px 120px", textAlign: "center" }}>
+        <div className="cf-cta-card" style={{ maxWidth: "760px", margin: "0 auto", background: "rgba(255,255,255,0.06)", backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "32px", padding: "80px 64px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18), 0 40px 100px rgba(0,0,0,0.4)", position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: 0, left: "20%", right: "20%", height: "1px", background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)" }} />
+          <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 700, fontStyle: "italic", letterSpacing: "-0.03em", lineHeight: 1.1, color: "rgba(255,255,255,0.95)", marginBottom: "20px" }}>
+            <T zh={t.ctaHeadline} en={en.ctaHeadline} />
+          </h2>
+          <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "17px", lineHeight: 1.75, color: "var(--text-secondary)", maxWidth: "480px", margin: "0 auto 40px" }}>
+            <T zh={t.ctaSub} en={en.ctaSub} />
+          </p>
+          <a href="/register" style={{ display: "block", padding: "16px 44px", background: "#2688f9", color: "white", borderRadius: "14px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, textDecoration: "none", textAlign: "center", boxShadow: "0 4px 32px rgba(38,136,249,0.5), inset 0 1px 0 rgba(255,255,255,0.25)", maxWidth: "240px", margin: "0 auto 16px" }}>
+            <T zh={t.ctaBtn} en={en.ctaBtn} />
+          </a>
+          <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "12px", color: "var(--text-ghost)", letterSpacing: "0.04em" }}>
+            <T zh={t.ctaNote} en={en.ctaNote} />
+          </p>
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer style={{ position: "relative", zIndex: 1, padding: "40px 48px", borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
+        <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "16px", fontWeight: 600, color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "8px" }}>
+          <span>🦞</span> ClawFirm
+        </div>
+        <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", color: "var(--text-ghost)", letterSpacing: "0.02em" }}>
+          © 2025 ClawFirm · <T zh={t.footer} en={en.footer} />
+        </p>
+      </footer>
+
+      <style>{`
+        @keyframes bounce {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50%       { transform: translateX(-50%) translateY(8px); }
+        }
+        .lang-btn:hover { opacity: 0.85; }
+
+        /* ── Tablet (≤ 900px) ── */
+        @media (max-width: 900px) {
+          .cf-pricing-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        /* ── Mobile (≤ 680px) ── */
+        @media (max-width: 680px) {
+          .cf-nav {
+            padding: 16px 20px !important;
+          }
+          .cf-hero-content {
+            padding: 100px 20px 0 !important;
+          }
+          .cf-hero-cta {
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+          .cf-hero-cta a {
+            width: 100% !important;
+            max-width: 320px !important;
+            justify-content: center !important;
+          }
+          .cf-features-grid {
+            grid-template-columns: 1fr !important;
+            border-radius: 16px !important;
+          }
+          .cf-steps-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .cf-pricing-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .cf-cta-card {
+            padding: 48px 28px !important;
+            border-radius: 24px !important;
+          }
+          #features {
+            padding: 80px 16px 60px !important;
+          }
+          #deploy {
+            padding: 60px 16px 60px !important;
+          }
+          #pricing {
+            padding: 60px 16px 60px !important;
+          }
+          footer {
+            padding: 32px 20px !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 8px !important;
+          }
+        }
+
+        /* ── Small mobile (≤ 400px) ── */
+        @media (max-width: 400px) {
+          .cf-nav {
+            padding: 14px 16px !important;
+          }
+          .cf-cta-card {
+            padding: 40px 20px !important;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
