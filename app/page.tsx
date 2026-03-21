@@ -34,8 +34,8 @@ const zh = {
   pf3: "个性化工作流配置",
   pf4: "30 天技术支持保障",
   pricingCta: "立即购买部署服务",
-  contactTitle: "扫码咨询",
-  contactSub: "添加微信，了解更多详情",
+  contactTitle: "加入社区",
+  contactSub: "与我们一起探索 AI 赚钱的无限可能",
   contactWechat: "微信号: PpCiting",
   ctaHeadline: "准备好让AI合伙人为你赚钱了吗？",
   ctaSub: "无需技术背景，一次付费，专属配置，永久使用",
@@ -80,8 +80,8 @@ const en = {
   pf3: "Personalized Workflow Configuration",
   pf4: "30-Day Technical Support",
   pricingCta: "Purchase Deployment Service",
-  contactTitle: "Add on WeChat",
-  contactSub: "Scan to connect and learn more",
+  contactTitle: "Join Our Community",
+  contactSub: "Explore the endless possibilities of making money with AI",
   contactWechat: "WeChat: PpCiting",
   ctaHeadline: "Ready to Let Your AI Partner Make You Money?",
   ctaSub: "No technical background needed. One-time payment, custom setup, lifetime access.",
@@ -289,7 +289,7 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Contact — real QR image */}
+          {/* Contact — Community */}
           <div style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "28px", padding: "44px 36px", textAlign: "center", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "26px", fontWeight: 700, fontStyle: "italic", color: "var(--text-primary)", marginBottom: "8px" }}>
               <T zh={t.contactTitle} en={en.contactTitle} />
@@ -297,7 +297,17 @@ export default function Home() {
             <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "14px", color: "var(--text-secondary)", marginBottom: "24px" }}>
               <T zh={t.contactSub} en={en.contactSub} />
             </p>
-            {/* Real WeChat QR image */}
+            {/* Discord link */}
+            <a
+              href="https://discord.gg/JNXz2utFW8"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "rgba(88,101,242,0.15)", border: "1px solid rgba(88,101,242,0.3)", borderRadius: "14px", padding: "14px 28px", color: "#7289da", fontSize: "16px", fontFamily: "Inter, system-ui, sans-serif", fontWeight: 600, textDecoration: "none", marginBottom: "20px", transition: "background 0.2s" }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+              Discord
+            </a>
+            {/* WeChat */}
             <div style={{ background: "white", padding: "12px", borderRadius: "16px", display: "inline-block", marginBottom: "20px", boxShadow: "0 8px 32px rgba(0,0,0,0.3)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
