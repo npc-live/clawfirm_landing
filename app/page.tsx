@@ -136,9 +136,10 @@ export default function Home() {
       </div>
 
       {/* ── Floating Nav ── */}
-      <nav className="cf-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 48px" }}>
+      <nav className="cf-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 48px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Playfair Display', Georgia, serif", fontSize: "22px", fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
-          <span style={{ fontSize: "26px" }}>🦞</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="ClawFirm" style={{ width: "52px", height: "52px", objectFit: "contain", borderRadius: "8px" }} />
           ClawFirm
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -345,7 +346,8 @@ export default function Home() {
       {/* ── Footer ── */}
       <footer style={{ position: "relative", zIndex: 1, padding: "40px 48px", borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
         <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "16px", fontWeight: 600, color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "8px" }}>
-          <span>🦞</span> ClawFirm
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="ClawFirm" style={{ width: "28px", height: "28px", objectFit: "contain" }} /> ClawFirm
         </div>
         <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", color: "var(--text-ghost)", letterSpacing: "0.02em" }}>
           © 2025 ClawFirm · <T zh={t.footer} en={en.footer} />
