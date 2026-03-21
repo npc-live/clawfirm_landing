@@ -15,14 +15,14 @@ const zh = {
   f3Desc: "针对不同平台特征，AI 自动生成高转化内容并精准投喂流量，让你的个人品牌和产品实现全网裂变。",
   deployTitle: "专业用户？自己动手",
   deploySub: "5 分钟内从零到运行，无需付费",
-  s1Title: "安装 WhipFlow CLI",
+  s1Title: "安装 ClawFirm CLI",
   s1Desc: "全局安装命令行工具，需要 Node 18+",
-  s2Title: "编写工作流",
-  s2Desc: "用纯文本定义步骤、变量和技能调用，无需样板代码",
-  s3Title: "运行并观察",
-  s3Desc: "运行时解析变量、按顺序调用技能，完整日志可观测",
-  s4Title: "迭代与部署",
-  s4Desc: "更换模型或调整 prompt，工作流合约保持一致",
+  s2Title: "登录并安装工具链",
+  s2Desc: "一键登录后自动安装全部注册工具，开箱即用",
+  s3Title: "用自然语言创建项目",
+  s3Desc: "输入一句话描述，AI 自动生成完整项目脚手架",
+  s4Title: "查看与管理工具",
+  s4Desc: "随时查看已注册工具列表，按需安装或卸载",
   deployCta: "查看完整文档 →",
   pricingBadge: "一次付费 · 终身受益",
   pricingTitle: "专业部署服务",
@@ -61,14 +61,14 @@ const en = {
   f3Desc: "Tailored to each platform's characteristics, AI auto-generates high-conversion content and precisely distributes traffic, enabling your personal brand and products to go viral across the web.",
   deployTitle: "Power User? DIY",
   deploySub: "From zero to running in under 5 minutes, free",
-  s1Title: "Install WhipFlow CLI",
+  s1Title: "Install ClawFirm CLI",
   s1Desc: "Install the CLI globally with npm. Requires Node 18+",
-  s2Title: "Write Your Workflow",
-  s2Desc: "Define steps, variables, and skill calls in plain text. No boilerplate",
-  s3Title: "Run & Observe",
-  s3Desc: "Runtime resolves variables, calls skills in order, full observability",
-  s4Title: "Iterate & Deploy",
-  s4Desc: "Swap models or tweak prompts — the workflow contract stays identical",
+  s2Title: "Login & Install Tools",
+  s2Desc: "One-click login, then auto-install all registered tools out of the box",
+  s3Title: "Create a Project with Natural Language",
+  s3Desc: "Describe your idea in one sentence, AI scaffolds the entire project",
+  s4Title: "View & Manage Tools",
+  s4Desc: "List registered tools anytime, install or uninstall on demand",
   deployCta: "View Full Docs →",
   pricingBadge: "One-Time Payment · Lifetime Value",
   pricingTitle: "Professional Deployment",
@@ -230,10 +230,10 @@ export default function Home() {
         </div>
         <div className="cf-steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px", maxWidth: "1100px", margin: "0 auto 40px" }}>
           {([
-            { n: "01", zh: t.s1Title, en: en.s1Title, descZh: t.s1Desc, descEn: en.s1Desc, code: "npm install -g @harness.farm/whipflow" },
-            { n: "02", zh: t.s2Title, en: en.s2Title, descZh: t.s2Desc, descEn: en.s2Desc, code: "touch my-workflow.whip" },
-            { n: "03", zh: t.s3Title, en: en.s3Title, descZh: t.s3Desc, descEn: en.s3Desc, code: "whipflow run my-workflow.whip" },
-            { n: "04", zh: t.s4Title, en: en.s4Title, descZh: t.s4Desc, descEn: en.s4Desc, code: "whipflow config set model claude-sonnet-4-6" },
+            { n: "01", zh: t.s1Title, en: en.s1Title, descZh: t.s1Desc, descEn: en.s1Desc, code: "npm install -g @harness.farm/clawfirm" },
+            { n: "02", zh: t.s2Title, en: en.s2Title, descZh: t.s2Desc, descEn: en.s2Desc, code: "clawfirm login && clawfirm install" },
+            { n: "03", zh: t.s3Title, en: en.s3Title, descZh: t.s3Desc, descEn: en.s3Desc, code: 'clawfirm new "一个天气预测交易引擎"' },
+            { n: "04", zh: t.s4Title, en: en.s4Title, descZh: t.s4Desc, descEn: en.s4Desc, code: "clawfirm list" },
           ] as const).map((s) => (
             <div key={s.n} style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "20px", padding: "32px 28px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)" }}>
               <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "36px", fontWeight: 900, fontStyle: "italic", color: "#2688f9", opacity: 0.7, marginBottom: "12px", letterSpacing: "-0.02em" }}>{s.n}</div>
@@ -248,7 +248,7 @@ export default function Home() {
           ))}
         </div>
         <div style={{ textAlign: "center" }}>
-          <a href="https://harness.farm" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", padding: "12px 28px", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "10px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "14px", fontWeight: 500, color: "var(--text-secondary)", textDecoration: "none" }}>
+          <a href="https://github.com/npc-live/clawfirm" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", padding: "12px 28px", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "10px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "14px", fontWeight: 500, color: "var(--text-secondary)", textDecoration: "none" }}>
             <T zh={t.deployCta} en={en.deployCta} />
           </a>
         </div>
@@ -304,7 +304,7 @@ export default function Home() {
               <img
                 src="/wechat.jpg"
                 alt="WeChat QR Code — PpCiting"
-                style={{ width: "180px", height: "180px", objectFit: "cover", borderRadius: "8px", display: "block" }}
+                style={{ width: "180px", height: "auto", objectFit: "contain", borderRadius: "8px", display: "block" }}
               />
             </div>
             <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "14px", color: "var(--text-secondary)", letterSpacing: "0.02em", marginBottom: "20px" }}>
