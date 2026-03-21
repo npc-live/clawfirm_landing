@@ -1,5 +1,5 @@
 const zh = {
-  badge: "一人公司AI合伙人",
+  badge: "AI是你的CTO,CMO和CFO",
   heroTitle: "一人公司的AI合伙人",
   heroSub: "专为新时代个体创业者打造。ClawFirm 作为你的 AI 合伙人，深度嵌入商业全链路，让一个人也能拥有一座工厂的战斗力，完成从创意到现金流的完整商业闭环。",
   heroCta: "立即开始",
@@ -53,12 +53,12 @@ const en = {
   featuresLabel: "Core Capabilities",
   featuresTitle: "Your AI Partner Makes You Money",
   featuresSub: "Three profit paths, AI does the heavy lifting",
-  f1Title: "Full-Stack Software Export",
-  f1Desc: "From deep user research, feature development to automated marketing, AI helps you build and distribute software products like a complete team.",
+  f1Title: "Full-Stack Software for Global Markets",
+  f1Desc: "From deep user research and feature development to automated marketing, AI helps you build and distribute software products like a full team — iterating rapidly with real paid user feedback.",
   f2Title: "Automated Arbitrage Trading",
-  f2Desc: "Leverage AI to capture market signals with precision, achieving efficient trading profits through algorithms.",
-  f3Title: "Social Media Matrix",
-  f3Desc: "AI automatically generates high-converting content tailored to different platforms and precisely delivers traffic, enabling viral growth.",
+  f2Desc: "Leveraging AI to capture market signals with precision, executing efficient algorithmic trades to steadily grow your assets through automated workflows.",
+  f3Title: "Personal Branding Building on Social Media",
+  f3Desc: "Tailored to each platform's characteristics, AI auto-generates high-conversion content and precisely distributes traffic, enabling your personal brand and products to go viral across the web.",
   deployTitle: "Power User? DIY",
   deploySub: "From zero to running in under 5 minutes, free",
   s1Title: "Install WhipFlow CLI",
@@ -72,7 +72,7 @@ const en = {
   deployCta: "View Full Docs →",
   pricingBadge: "One-Time Payment · Lifetime Value",
   pricingTitle: "Professional Deployment",
-  pricingPrice: "¥999",
+  pricingPrice: "$145",
   pricingUnit: "one-time",
   pricingDesc: "Complete Installation & Configuration Guidance",
   pf1: "Remote 1-on-1 Environment Setup",
@@ -266,7 +266,7 @@ export default function Home() {
               <T zh={t.pricingTitle} en={en.pricingTitle} />
             </h3>
             <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "52px", fontWeight: 900, color: "var(--text-primary)", marginBottom: "4px", letterSpacing: "-0.03em" }}>
-              {t.pricingPrice}
+              <T zh={t.pricingPrice} en={en.pricingPrice} />
               <span style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "18px", fontWeight: 400, color: "var(--text-muted)", marginLeft: "8px" }}>
                 <T zh={t.pricingUnit} en={en.pricingUnit} />
               </span>
