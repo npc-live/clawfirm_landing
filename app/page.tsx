@@ -129,9 +129,10 @@ function T({ zh: z, en: e }: { zh: string; en: string }) {
 
 export default function Home() {
   const t = zh;
+  const isLoggedIn = false;
 
   return (
-    <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--bg-primary)", minHeight: "100dvh" }}>
       <script dangerouslySetInnerHTML={{ __html: i18nScript }} />
 
       {/* ── Decorative blobs ── */}
@@ -154,7 +155,20 @@ export default function Home() {
               key={l}
               data-lang={l}
               className="lang-btn"
-              style={{ padding: "6px 16px", borderRadius: "100px", border: "1px solid transparent", background: "transparent", color: "var(--text-muted)", fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", fontWeight: 500, cursor: "pointer", transition: "all 0.2s", letterSpacing: "0.04em" }}
+              style={{
+                padding: "6px 16px",
+                borderRadius: "100px",
+                border: l === "zh" ? "1px solid rgba(255,255,255,0.25)" : "1px solid transparent",
+                background: l === "zh" ? "rgba(255,255,255,0.1)" : "transparent",
+                backdropFilter: l === "zh" ? "blur(12px)" : "none",
+                color: l === "zh" ? "rgb(240,237,229)" : "rgba(255,255,255,0.5)",
+                fontFamily: "Inter, system-ui, sans-serif",
+                fontSize: "13px",
+                fontWeight: 500,
+                cursor: "pointer",
+                transition: "all 0.2s",
+                letterSpacing: "0.04em",
+              }}
             >
               {l === "zh" ? "中文" : "EN"}
             </button>
@@ -164,7 +178,7 @@ export default function Home() {
       </nav>
 
       {/* ══ HERO ══ */}
-      <section style={{ position: "relative", width: "100vw", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", zIndex: 1 }}>
+      <section style={{ position: "relative", width: "100%", minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", zIndex: 1 }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1, background: "linear-gradient(to bottom, rgba(34,34,34,0.3) 0%, rgba(34,34,34,0.1) 50%, rgba(34,34,34,0.6) 100%)" }} />
         <div className="cf-hero-content" style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "80px 24px 0", maxWidth: "900px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "6px 18px", background: "rgba(38,136,249,0.15)", border: "1px solid rgba(38,136,249,0.3)", borderRadius: "100px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "12px", fontWeight: 500, color: "#2688f9", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "40px", backdropFilter: "blur(12px)" }}>
