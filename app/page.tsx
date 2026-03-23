@@ -106,19 +106,22 @@ const i18nScript = `
     });
     localStorage.setItem('cf_lang', lang);
   }
-  document.addEventListener('DOMContentLoaded', function(){
-    // Attach click handlers
+  function init() {
     document.querySelectorAll('.lang-btn').forEach(function(btn){
       btn.addEventListener('click', function(){ apply(btn.getAttribute('data-lang')); });
     });
-    // Apply saved or default lang
-    apply(localStorage.getItem('cf_lang') || 'zh');
-  });
+    apply(localStorage.getItem('cf_lang') || 'en');
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 `;
 
 function T({ zh: z, en: e }: { zh: string; en: string }) {
-  return <span data-zh={z} data-en={e}>{z}</span>;
+  return <span data-zh={z} data-en={e}>{e}</span>;
 }
 
 export default function Home() {
