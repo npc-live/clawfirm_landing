@@ -106,10 +106,11 @@ const i18nScript = `
     });
     localStorage.setItem('cf_lang', lang);
   }
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.lang-btn');
+    if (btn) apply(btn.getAttribute('data-lang'));
+  });
   function init() {
-    document.querySelectorAll('.lang-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){ apply(btn.getAttribute('data-lang')); });
-    });
     apply(localStorage.getItem('cf_lang') || 'en');
   }
   if (document.readyState === 'loading') {
