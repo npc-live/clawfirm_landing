@@ -120,6 +120,8 @@ const i18nScript = `
 })();
 `;
 
+import NavAuth from "./components/NavAuth";
+
 function T({ zh: z, en: e }: { zh: string; en: string }) {
   return <span data-zh={z} data-en={e}>{e}</span>;
 }
@@ -156,8 +158,7 @@ export default function Home() {
               {l === "zh" ? "中文" : "EN"}
             </button>
           ))}
-          <a href="/login" style={{ padding: "7px 18px", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.15)", background: "transparent", color: "var(--text-muted)", fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", fontWeight: 500, textDecoration: "none", letterSpacing: "0.04em" }}>登录</a>
-          <a href="/register" style={{ padding: "7px 18px", borderRadius: "100px", border: "none", background: "#2688f9", color: "white", fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", fontWeight: 600, textDecoration: "none", letterSpacing: "0.04em", boxShadow: "0 2px 12px rgba(38,136,249,0.4)" }}>注册</a>
+          <NavAuth />
         </div>
       </nav>
 
@@ -175,7 +176,7 @@ export default function Home() {
             <T zh={t.heroSub} en={en.heroSub} />
           </p>
           <div className="cf-hero-cta" style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="/register" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "14px 36px", background: "#2688f9", color: "white", borderRadius: "12px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "15px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 24px rgba(38,136,249,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
+            <a href="#" data-auth="register" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "14px 36px", background: "#2688f9", color: "white", borderRadius: "12px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "15px", fontWeight: 600, textDecoration: "none", cursor: "pointer", boxShadow: "0 4px 24px rgba(38,136,249,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
               <T zh={t.heroCta} en={en.heroCta} /> →
             </a>
             <a href="#features" style={{ display: "inline-flex", alignItems: "center", padding: "14px 32px", background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.15)", color: "var(--text-primary)", borderRadius: "12px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "15px", fontWeight: 500, textDecoration: "none" }}>
@@ -288,7 +289,7 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <button style={{ width: "100%", padding: "16px 24px", background: "#2688f9", color: "white", border: "none", borderRadius: "14px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 24px rgba(38,136,249,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
+            <button data-auth="login" style={{ width: "100%", padding: "16px 24px", background: "#2688f9", color: "white", border: "none", borderRadius: "14px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 24px rgba(38,136,249,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
               <T zh={t.pricingCta} en={en.pricingCta} />
             </button>
           </div>
@@ -359,7 +360,7 @@ export default function Home() {
           <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "17px", lineHeight: 1.75, color: "var(--text-secondary)", maxWidth: "480px", margin: "0 auto 40px" }}>
             <T zh={t.ctaSub} en={en.ctaSub} />
           </p>
-          <a href="/register" style={{ display: "block", padding: "16px 44px", background: "#2688f9", color: "white", borderRadius: "14px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, textDecoration: "none", textAlign: "center", boxShadow: "0 4px 32px rgba(38,136,249,0.5), inset 0 1px 0 rgba(255,255,255,0.25)", maxWidth: "240px", margin: "0 auto 16px" }}>
+          <a href="#" data-auth="register" style={{ display: "block", padding: "16px 44px", background: "#2688f9", color: "white", borderRadius: "14px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, textDecoration: "none", textAlign: "center", boxShadow: "0 4px 32px rgba(38,136,249,0.5), inset 0 1px 0 rgba(255,255,255,0.25)", maxWidth: "240px", margin: "0 auto 16px", cursor: "pointer" }}>
             <T zh={t.ctaBtn} en={en.ctaBtn} />
           </a>
           <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "12px", color: "var(--text-ghost)", letterSpacing: "0.04em" }}>
