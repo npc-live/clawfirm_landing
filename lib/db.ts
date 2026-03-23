@@ -50,7 +50,7 @@ export async function createUser(
   hash: string
 ): Promise<void> {
   await db
-    .prepare("INSERT INTO users (id, email, hash, is_unlocked) VALUES (?, ?, ?, 1)")
+    .prepare("INSERT INTO users (id, email, hash, is_unlocked) VALUES (?, ?, ?, 0)")
     .bind(id, email, hash)
     .run();
 }
