@@ -289,7 +289,7 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <button data-auth="login" style={{ width: "100%", padding: "16px 24px", background: "#2688f9", color: "white", border: "none", borderRadius: "14px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 24px rgba(38,136,249,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
+            <button data-auth="payment" style={{ width: "100%", padding: "16px 24px", background: "#2688f9", color: "white", border: "none", borderRadius: "14px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 24px rgba(38,136,249,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
               <T zh={t.pricingCta} en={en.pricingCta} />
             </button>
           </div>

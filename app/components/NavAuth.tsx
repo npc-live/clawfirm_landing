@@ -9,6 +9,7 @@ export default function NavAuth() {
   const userRef = useRef<{ email: string } | null>(null);
   const [checked, setChecked] = useState(false);
   const [modal, setModal] = useState<"login" | "register" | null>(null);
+  const [redirectTo, setRedirectTo] = useState<string | undefined>();
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -33,12 +34,15 @@ export default function NavAuth() {
       const el = (e.target as HTMLElement).closest("[data-auth]");
       if (!el) return;
       e.preventDefault();
-      // If already logged in, go to dashboard
+      const authType = el.getAttribute("data-auth") || "login";
       if (userRef.current) {
-        window.location.href = "/dashboard";
+        // Only payment button redirects to dashboard; other CTAs do nothing
+        if (authType === "payment") window.location.href = "/dashboard";
         return;
       }
-      const tab = (el.getAttribute("data-auth") as "login" | "register") || "login";
+      const tab = (authType === "payment" ? "login" : authType) as "login" | "register";
+      if (authType === "payment") setRedirectTo("/dashboard");
+      else setRedirectTo(undefined);
       openModal(tab);
     }
     document.addEventListener("click", handleAuthClick);
@@ -96,7 +100,7 @@ export default function NavAuth() {
       >
         Sign Up
       </button>
-      {modal && <AuthModal onClose={() => setModal(null)} defaultTab={modal} />}
+      {modal && <AuthModal onClose={() => { setModal(null); setRedirectTo(undefined); }} defaultTab={modal} redirectTo={redirectTo} />}
     </>
   );
 }

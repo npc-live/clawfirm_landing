@@ -46,9 +46,11 @@ const tabStyle = (active: boolean): React.CSSProperties => ({
 export default function AuthModal({
   onClose,
   defaultTab = "login",
+  redirectTo,
 }: {
   onClose: () => void;
   defaultTab?: "login" | "register";
+  redirectTo?: string;
 }) {
   const [tab, setTab] = useState<"login" | "register">(defaultTab);
   const [email, setEmail] = useState("");
@@ -84,7 +86,11 @@ export default function AuthModal({
         setError(data.error ?? "Login failed");
       } else {
         onClose();
-        window.location.reload();
+        if (redirectTo) {
+          window.location.href = redirectTo;
+        } else {
+          window.location.reload();
+        }
       }
     } catch {
       setError("Network error");
