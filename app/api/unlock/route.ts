@@ -6,7 +6,7 @@ import { getUserById } from "@/lib/db";
 export const runtime = "edge";
 
 const USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
-const PRICE_USDC_ATOMIC = "1000000"; // 1 USDC (1_000_000 micro-USDC) — test price
+const PRICE_USDC_ATOMIC = "145000000"; // 145 USDC (145_000_000 micro-USDC)
 const NETWORK = "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"; // Solana mainnet CAIP-2
 const FACILITATOR = "https://facilitator.payai.network";
 const FACILITATOR_FEE_PAYER = "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4";

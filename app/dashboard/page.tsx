@@ -121,7 +121,7 @@ export default async function DashboardPage() {
             <div style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "24px", padding: "40px", maxWidth: "560px", backdropFilter: "blur(20px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)" }}>
               {/* Price */}
               <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginBottom: "28px" }}>
-                <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "48px", fontWeight: 900, color: "#f0ede5", letterSpacing: "-0.03em" }}>1</span>
+                <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "48px", fontWeight: 900, color: "#f0ede5", letterSpacing: "-0.03em" }}>145</span>
                 <span style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "18px", fontWeight: 600, color: "rgba(255,255,255,0.6)" }}>USDC</span>
                 <span style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.35)", marginLeft: "4px" }}>一次性 · 永久有效</span>
               </div>

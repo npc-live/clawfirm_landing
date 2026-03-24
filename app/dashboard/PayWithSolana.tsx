@@ -21,7 +21,7 @@ const RPC_URL = "https://mainnet.helius-rpc.com/?api-key=c5ac2832-5f23-470e-a61f
 type Status = "idle" | "connecting" | "building" | "signing" | "verifying" | "success" | "error";
 
 const LABELS: Record<Status, string> = {
-  idle: "用 Solana 付款解锁  ·  1 USDC",
+  idle: "用 Solana 付款解锁  ·  145 USDC",
   connecting: "连接钱包中…",
   building: "准备交易中…",
   signing: "等待 Phantom 签名…",
