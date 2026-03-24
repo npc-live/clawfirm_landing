@@ -92,8 +92,6 @@ export default function PayWithSolana() {
 
       const accepted = paymentRequired.accepts[0];
       if (!accepted) throw new Error("支付要求格式无效");
-      const feePayer = accepted.extra?.feePayer;
-      if (!feePayer) throw new Error("未找到 facilitator feePayer");
 
       const connection = new Connection(RPC_URL, "confirmed");
       const payTo = new PublicKey(accepted.payTo);
@@ -108,7 +106,7 @@ export default function PayWithSolana() {
       const { blockhash } = await connection.getLatestBlockhash("confirmed");
 
       const message = new TransactionMessage({
-        payerKey: new PublicKey(feePayer),
+        payerKey: publicKey,
         recentBlockhash: blockhash,
         instructions: [
           ComputeBudgetProgram.setComputeUnitLimit({ units: 20_000 }),
