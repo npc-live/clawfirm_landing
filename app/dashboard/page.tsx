@@ -8,6 +8,7 @@ import { verifySession } from "@/lib/session";
 import { getUserById } from "@/lib/db";
 import LogoutButton from "./LogoutButton";
 import PayWithSolana from "./PayWithSolana";
+import PayWithQR from "./PayWithQR";
 import GenerateWhip from "./GenerateWhip";
 
 // ── Placeholder skills (fill in real content later) ──
@@ -140,7 +141,15 @@ export default async function DashboardPage() {
                 ))}
               </div>
 
-              <PayWithSolana />
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                <PayWithSolana />
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.08)" }} />
+                  <span style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.25)", flexShrink: 0 }}>或</span>
+                  <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.08)" }} />
+                </div>
+                <PayWithQR payTo={env.SOLANA_PAY_TO} userId={payload.sub} />
+              </div>
 
               <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.25)", marginTop: "16px", lineHeight: 1.5 }}>
                 通过 x402 协议 · Solana 主网 USDC · 由 Coinbase 验证
