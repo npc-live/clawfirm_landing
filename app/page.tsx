@@ -6,13 +6,15 @@ const zh = {
   heroLearn: "了解更多",
   featuresLabel: "核心能力",
   featuresTitle: "AI合伙人帮你赚钱",
-  featuresSub: "三大变现路径，AI 全程出力",
+  featuresSub: "四大变现路径，AI 全程出力",
   f1Title: "全栈软件出海",
   f1Desc: "从深度用户调研、功能构建到自动化营销，AI 帮你像一支完整团队一样打造并分发软件产品，通过真实付费反馈快速迭代。",
   f2Title: "自动化套利交易",
   f2Desc: "利用 AI 敏锐捕捉市场信号，通过算法实现高效率的交易获利，让资产在自动化流程中稳健增值。",
   f3Title: "自媒体矩阵分发",
   f3Desc: "针对不同平台特征，AI 自动生成高转化内容并精准投喂流量，让你的个人品牌和产品实现全网裂变。",
+  f4Title: "跨境电商搬运套利",
+  f4Desc: "从 1688 选品到 Amazon/独立站上架，AI 自动计算利润、监控竞品价格、批量处理商品信息，实现选品-上架-定价全链路自动化。",
   deployTitle: "专业用户？自己动手",
   deploySub: "5 分钟内从零到运行，无需付费",
   s1Title: "安装 ClawFirm CLI",
@@ -52,13 +54,15 @@ const en = {
   heroLearn: "Learn More",
   featuresLabel: "Core Capabilities",
   featuresTitle: "Your AI Partner Makes You Money",
-  featuresSub: "Three profit paths, AI does the heavy lifting",
+  featuresSub: "Four profit paths, AI does the heavy lifting",
   f1Title: "Full-Stack Software for Global Markets",
   f1Desc: "From deep user research and feature development to automated marketing, AI helps you build and distribute software products like a full team — iterating rapidly with real paid user feedback.",
   f2Title: "Automated Arbitrage and Trading",
   f2Desc: "Leveraging AI to capture market signals with precision, executing efficient algorithmic trades to steadily grow your assets through automated workflows.",
   f3Title: "Creator Economy",
   f3Desc: "Tailored to each platform's characteristics, AI auto-generates high-conversion content and precisely distributes traffic, enabling the content for your personal brand or ad to go viral across social media platforms.",
+  f4Title: "Cross-Border E-Commerce",
+  f4Desc: "From sourcing on 1688 to listing on Amazon or your own store — AI auto-calculates margins, monitors competitor pricing, and batch-processes product info, automating the entire pipeline from sourcing to listing to pricing.",
   deployTitle: "Power User? DIY",
   deploySub: "From zero to running in under 5 minutes, free",
   s1Title: "Install ClawFirm CLI",
@@ -219,11 +223,12 @@ export default function Home() {
             <T zh={t.featuresSub} en={en.featuresSub} />
           </p>
         </div>
-        <div className="cf-features-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2px", maxWidth: "1100px", margin: "0 auto", border: "1px solid var(--border-default)", borderRadius: "24px", overflow: "hidden" }}>
+        <div className="cf-features-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "2px", maxWidth: "1100px", margin: "0 auto", border: "1px solid var(--border-default)", borderRadius: "24px", overflow: "hidden" }}>
           {([
             { icon: "🚀", zh: t.f1Title, en: en.f1Title, descZh: t.f1Desc, descEn: en.f1Desc, accent: "rgba(38,136,249,0.15)" },
             { icon: "📈", zh: t.f2Title, en: en.f2Title, descZh: t.f2Desc, descEn: en.f2Desc, accent: "rgba(120,60,200,0.15)" },
             { icon: "🌐", zh: t.f3Title, en: en.f3Title, descZh: t.f3Desc, descEn: en.f3Desc, accent: "rgba(38,136,249,0.10)" },
+            { icon: "🛒", zh: t.f4Title, en: en.f4Title, descZh: t.f4Desc, descEn: en.f4Desc, accent: "rgba(255,160,40,0.15)" },
           ] as const).map((f) => (
             <div key={f.icon} style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", padding: "44px 36px", display: "flex", flexDirection: "column", gap: "16px", borderRight: "1px solid var(--border-subtle)" }}>
               <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: f.accent, border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>{f.icon}</div>
