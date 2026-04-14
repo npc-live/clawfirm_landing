@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ClawFirm — Creator Economy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-primary: rgb(34,34,34);
+      --bg-card: rgba(255,255,255,0.04);
+      --text-primary: rgb(240,237,229);
+      --text-secondary: rgba(240,237,229,0.65);
+      --text-muted: rgba(255,255,255,0.5);
+      --text-ghost: rgba(255,255,255,0.3);
+      --border-default: rgba(255,255,255,0.1);
+      --border-subtle: rgba(255,255,255,0.05);
+      --accent: #2688f9;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg-primary);color:var(--text-primary);font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.75;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+
+    /* Ambient */
+    .bg-glow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .bg-glow div{position:absolute;border-radius:50%}
+    .g1{width:700px;height:700px;background:radial-gradient(circle,rgba(38,136,249,.18) 0%,transparent 70%);filter:blur(60px);top:-200px;left:-200px}
+    .g2{width:600px;height:600px;background:radial-gradient(circle,rgba(120,60,200,.14) 0%,transparent 70%);filter:blur(80px);top:30%;right:-150px}
+    .g3{width:500px;height:500px;background:radial-gradient(circle,rgba(38,136,249,.10) 0%,transparent 70%);filter:blur(100px);bottom:0;left:30%}
+
+    .container{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+    /* Nav */
+    .cf-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 48px;background:rgba(34,34,34,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+    .cf-nav-logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:var(--text-primary);letter-spacing:-.02em}
+    .cf-nav-right{display:flex;align-items:center;gap:28px}
+    .cf-nav-right a{font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:500;color:var(--text-muted);transition:color .2s}
+    .cf-nav-right a:hover{color:var(--text-primary)}
+    .cf-nav-right a.active{color:var(--accent)}
+    .lang-group{display:flex;align-items:center;gap:4px;margin-left:12px}
+    .lang-btn{padding:6px 16px;border-radius:100px;border:1px solid transparent;background:transparent;color:var(--text-muted);font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;letter-spacing:.04em}
+
+    /* Sections */
+    section{position:relative;z-index:1}
+    .sl{font-family:'Inter',system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+    .sh{font-family:'Playfair Display',Georgia,serif;font-size:clamp(32px,5vw,56px);font-weight:700;font-style:italic;letter-spacing:-.02em;line-height:1.15;color:var(--text-primary);margin-bottom:16px}
+    .sd{font-family:'Lora',Georgia,serif;font-size:18px;line-height:1.75;color:var(--text-secondary);max-width:520px}
+    .sec-hd{text-align:center;margin-bottom:64px}
+    .sec-hd .sd{margin:0 auto}
+
+    .fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+    .fade-in.visible{opacity:1;transform:none}
+
+    /* Buttons */
+    .btn-p{display:inline-flex;align-items:center;gap:8px;padding:14px 36px;background:var(--accent);color:#fff;border-radius:12px;border:none;cursor:pointer;font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:600;box-shadow:0 4px 24px rgba(38,136,249,.4),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .2s,box-shadow .2s}
+    .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(38,136,249,.5),inset 0 1px 0 rgba(255,255,255,.2)}
+    .btn-g{display:inline-flex;align-items:center;padding:14px 32px;background:rgba(255,255,255,.08);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.15);color:var(--text-primary);border-radius:12px;cursor:pointer;font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:500;transition:all .2s}
+    .btn-g:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+
+    /* Hero */
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px 0}
+    .hero-inner{max-width:900px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;background:rgba(38,136,249,.15);border:1px solid rgba(38,136,249,.3);border-radius:100px;font-family:'Inter',system-ui,sans-serif;font-size:12px;font-weight:500;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:40px;backdrop-filter:blur(12px)}
+    .hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(48px,8vw,88px);font-weight:700;font-style:italic;letter-spacing:-.03em;line-height:1.05;color:rgba(255,255,255,.95);margin-bottom:32px}
+    .hero-sub{font-family:'Lora',Georgia,serif;font-size:clamp(16px,2vw,20px);line-height:1.75;color:var(--text-secondary);max-width:640px;margin:0 auto 48px}
+    .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+    .plat-strip{display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap}
+    .plat-chip{display:flex;align-items:center;gap:10px;padding:10px 20px;background:rgba(255,255,255,.05);border:1px solid var(--border-subtle);border-radius:100px;font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:500;color:var(--text-secondary);transition:all .2s}
+    .plat-chip:hover{background:rgba(255,255,255,.08);border-color:var(--border-default);color:var(--text-primary)}
+    .pd{width:8px;height:8px;border-radius:50%}
+    .scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-family:'Inter',system-ui,sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;animation:bounce 2s ease-in-out infinite}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+    /* Capability Grid */
+    #cap{padding:120px 24px 100px}
+    .cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;border:1px solid var(--border-default);border-radius:24px;overflow:hidden}
+    .cc{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:40px 32px;display:flex;flex-direction:column;gap:14px;border-right:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);transition:background .3s}
+    .cc:hover{background:rgba(255,255,255,.06)}
+    .ci{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
+    .cc h3{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;color:var(--text-primary);line-height:1.25}
+    .cc .ce{font-family:'Inter',system-ui,sans-serif;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+    .cc p{font-size:15px;line-height:1.75;color:var(--text-secondary)}
+    .ct{font-family:'Monaco','Menlo',monospace;font-size:11px;color:var(--text-ghost);margin-top:auto}
+
+    /* Pipeline */
+    #pipe{padding:80px 24px 100px}
+    .pt{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-default);border-radius:24px;padding:44px 40px;margin-bottom:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+    .pl{font-family:'Inter',system-ui,sans-serif;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+    .pt h3{font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;font-style:italic;color:var(--text-primary);margin-bottom:28px}
+    .ps{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+    .pn{display:flex;align-items:center;gap:8px;padding:14px 22px;background:rgba(38,136,249,.08);border:1px solid rgba(38,136,249,.15);border-radius:14px;font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:600;color:var(--text-primary);white-space:nowrap;transition:all .2s}
+    .pn:hover{background:rgba(38,136,249,.15);border-color:rgba(38,136,249,.3)}
+    .pa{color:var(--text-ghost);font-size:20px;padding:0 10px;flex-shrink:0}
+    .pt.vid .pn{background:rgba(120,60,200,.08);border-color:rgba(120,60,200,.15)}
+    .pt.vid .pn:hover{background:rgba(120,60,200,.15);border-color:rgba(120,60,200,.3)}
+    .pt.vid .pl{color:rgba(180,130,255,.9)}
+
+    /* Tabs */
+    #plat{padding:80px 24px 100px}
+    .tabs-row{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+    .tb{padding:8px 22px;border-radius:100px;font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;border:1px solid transparent;background:transparent;color:var(--text-muted)}
+    .tb:hover{color:var(--text-primary)}
+    .tb.active{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);backdrop-filter:blur(12px);color:var(--text-primary)}
+    .tp-panel{display:none}.tp-panel.active{display:block}
+    .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+    .ck{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);border:1px solid var(--border-subtle);border-radius:16px;padding:22px 24px;display:flex;gap:16px;transition:all .2s}
+    .ck:hover{background:rgba(255,255,255,.06);border-color:var(--border-default)}
+    .cki{width:40px;height:40px;flex-shrink:0;border-radius:10px;background:rgba(38,136,249,.1);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:18px}
+    .ck h4{font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:2px}
+    .ck code{font-family:'Monaco','Menlo',monospace;font-size:11px;color:var(--accent);background:rgba(38,136,249,.1);padding:2px 8px;border-radius:4px}
+    .ck p{font-size:13px;color:var(--text-secondary);margin-top:6px;line-height:1.6}
+
+    /* Viral */
+    #viral{padding:80px 24px 100px}
+    .vg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+    .vc{background:var(--bg-card);backdrop-filter:blur(16px);border:1px solid var(--border-subtle);border-radius:20px;padding:36px 32px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:all .3s}
+    .vc:hover{background:rgba(255,255,255,.06)}
+    .vn{font-family:'Playfair Display',Georgia,serif;font-size:36px;font-weight:900;font-style:italic;color:var(--accent);opacity:.7;margin-bottom:12px;letter-spacing:-.02em}
+    .vc h3{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+    .vc .ve{font-family:'Inter',system-ui,sans-serif;font-size:12px;color:var(--accent);letter-spacing:.04em;margin-bottom:14px}
+    .vc p{font-size:15px;color:var(--text-secondary)}
+    .vc ul{list-style:none;margin-top:12px}
+    .vc li{font-size:14px;color:var(--text-secondary);padding:5px 0;display:flex;align-items:baseline;gap:10px}
+    .vc li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:8px}
+
+    /* Video Flow */
+    #vid{padding:80px 24px 100px}
+    .vf{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-default);border-radius:24px;padding:48px 44px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+    .fr{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .fn{background:rgba(38,136,249,.06);border:1px solid rgba(38,136,249,.12);border-radius:16px;padding:20px 28px;text-align:center;min-width:170px;transition:all .2s}
+    .fn:hover{background:rgba(38,136,249,.12);border-color:rgba(38,136,249,.25)}
+    .fn h4{font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+    .fn p{font-family:'Inter',system-ui,sans-serif;font-size:12px;color:var(--text-muted)}
+    .fn.pu{background:rgba(120,60,200,.06);border-color:rgba(120,60,200,.12)}.fn.pu:hover{background:rgba(120,60,200,.12);border-color:rgba(120,60,200,.25)}
+    .fn.gr{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.12)}.fn.gr:hover{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.25)}
+    .fn.w{min-width:340px}
+    .fa{text-align:center;color:var(--text-ghost);font-size:22px;margin-bottom:20px}
+    .br{display:flex;gap:6px;justify-content:center;margin-top:8px}
+    .mb{font-family:'Inter',system-ui,sans-serif;font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px}
+    .mb-b{background:rgba(38,136,249,.12);color:var(--accent)}.mb-p{background:rgba(120,60,200,.12);color:rgba(180,130,255,.9)}.mb-g{background:rgba(52,211,153,.12);color:#34d399}
+
+    /* Quickstart */
+    #qs{padding:80px 24px 100px}
+    .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:40px}
+    .sc{background:rgba(255,255,255,.05);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 28px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+    .sn{font-family:'Playfair Display',Georgia,serif;font-size:36px;font-weight:900;font-style:italic;color:var(--accent);opacity:.7;margin-bottom:12px;letter-spacing:-.02em}
+    .sc h4{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:600;color:var(--text-primary);margin-bottom:8px}
+    .sc p{font-family:'Lora',Georgia,serif;font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:16px}
+    .cb{background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;font-family:'Monaco','Menlo',monospace;font-size:12px;color:var(--accent);overflow-x:auto}
+
+    .terminal{background:rgba(0,0,0,.5);border:1px solid var(--border-default);border-radius:16px;overflow:hidden;max-width:740px;margin:0 auto}
+    .term-bar{display:flex;align-items:center;gap:8px;padding:14px 20px;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border-subtle)}
+    .td{width:12px;height:12px;border-radius:50%}.td-r{background:#ff5f57}.td-y{background:#ffbd2e}.td-g{background:#28c840}
+    .term-t{flex:1;text-align:center;font-family:'Inter',system-ui,sans-serif;font-size:12px;color:var(--text-ghost)}
+    .term-b{padding:24px;font-family:'Monaco','Menlo','Cascadia Code',monospace;font-size:13px;line-height:2.1;min-height:250px}
+    .tl{opacity:0;transition:opacity .3s}.tl.show{opacity:1}
+    .t-p{color:var(--accent)}.t-c{color:var(--text-primary)}.t-m{color:var(--text-ghost)}.t-ok{color:#34d399}
+    .cur{display:inline-block;width:8px;height:16px;background:var(--accent);vertical-align:text-bottom;animation:blink 1s step-end infinite}
+    @keyframes blink{50%{opacity:0}}
+
+
+    .dl-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+    /* CTA */
+    .cta-sec{padding:80px 24px 40px}
+    .cta-card{background:rgba(38,136,249,.08);backdrop-filter:blur(40px) saturate(200%);border:1px solid rgba(38,136,249,.2);border-radius:28px;padding:72px 48px;text-align:center;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 32px 80px rgba(0,0,0,.3)}
+    .cta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(38,136,249,.6),transparent)}
+    .cta-card h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,4vw,44px);font-weight:700;font-style:italic;color:var(--text-primary);margin-bottom:16px}
+    .cta-card p{font-family:'Lora',Georgia,serif;font-size:17px;color:var(--text-secondary);max-width:480px;margin:0 auto 36px}
+    .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+    footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-top:1px solid var(--border-subtle);position:relative;z-index:1}
+    footer span,footer a{font-family:'Inter',system-ui,sans-serif;font-size:13px;color:var(--text-ghost)}
+    footer a{transition:color .2s}footer a:hover{color:var(--text-primary)}
+    .fl{display:flex;gap:24px}
+
+    @media(max-width:680px){
+      .cf-nav{padding:16px 20px}
+      .nav-lnk{display:none!important}
+      .hero{padding:100px 20px 0}
+      .hero-cta{flex-direction:column;align-items:center}
+      .hero-cta a{width:100%;max-width:320px;justify-content:center}
+      .cap-grid{grid-template-columns:1fr!important;border-radius:16px}
+      .ps{flex-wrap:wrap;gap:8px}.pa{display:none}.pn{flex:1;min-width:120px;justify-content:center}
+      .sg{grid-template-columns:1fr}
+      .vf{padding:28px 20px}
+      .cta-card{padding:48px 28px;border-radius:24px}
+      footer{padding:32px 20px;flex-direction:column;align-items:flex-start;gap:8px}
+      #cap,#pipe,#plat,#viral,#vid,#qs{padding:80px 16px 60px}
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-glow" aria-hidden="true"><div class="g1"></div><div class="g2"></div><div class="g3"></div></div>
+
+<!-- Language init (runs before paint, matching main site) -->
+<script>
+(function(){
+  function apply(lang){
+    document.querySelectorAll('[data-zh]').forEach(function(el){
+      el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+    });
+    document.querySelectorAll('[data-zh-html]').forEach(function(el){
+      el.innerHTML = lang==='en' ? el.getAttribute('data-en-html') : el.getAttribute('data-zh-html');
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      var active = btn.getAttribute('data-lang')===lang;
+      btn.style.border = active ? '1px solid rgba(255,255,255,0.25)' : '1px solid transparent';
+      btn.style.background = active ? 'rgba(255,255,255,0.1)' : 'transparent';
+      btn.style.backdropFilter = active ? 'blur(12px)' : 'none';
+      btn.style.color = active ? 'rgb(240,237,229)' : 'rgba(255,255,255,0.5)';
+    });
+    document.documentElement.lang = lang==='en' ? 'en' : 'zh-CN';
+    localStorage.setItem('cf_lang',lang);
+  }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.lang-btn');
+    if(btn) apply(btn.getAttribute('data-lang'));
+  });
+  function init(){ apply(localStorage.getItem('cf_lang')||'zh'); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
+
+<!-- Nav -->
+<nav class="cf-nav">
+  <a href="https://clawfirm.dev" class="cf-nav-logo"><svg class="nav-icon" viewBox="0 0 512 512" width="28" height="28"><defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF6B5A"/><stop offset="30%" stop-color="#FF5A45"/><stop offset="100%" stop-color="#E13030"/></linearGradient><g id="sr"><line x1="256" y1="46" x2="256" y2="92" stroke="url(#sg)" stroke-width="15" stroke-linecap="round"/><line x1="256" y1="164" x2="256" y2="206" stroke="url(#sg)" stroke-width="15" stroke-linecap="round"/></g></defs><use href="#sr" transform="rotate(0 256 256)"/><use href="#sr" transform="rotate(36 256 256)"/><use href="#sr" transform="rotate(72 256 256)"/><use href="#sr" transform="rotate(108 256 256)"/><use href="#sr" transform="rotate(144 256 256)"/><use href="#sr" transform="rotate(180 256 256)"/><use href="#sr" transform="rotate(216 256 256)"/><use href="#sr" transform="rotate(252 256 256)"/><use href="#sr" transform="rotate(288 256 256)"/><use href="#sr" transform="rotate(324 256 256)"/><path d="M 164 164 A 130 130 0 1 1 128 234" fill="none" stroke="url(#sg)" stroke-width="52" stroke-linecap="round"/><g stroke="url(#sg)" stroke-width="14" stroke-linecap="round"><line x1="164" y1="164" x2="120" y2="150"/><line x1="164" y1="164" x2="150" y2="120"/></g><path d="M 100 234 C 60 220, 50 160, 90 90" fill="none" stroke="url(#sg)" stroke-width="5" stroke-linecap="round"/><path d="M 100 234 C 75 200, 100 130, 126 76" fill="none" stroke="url(#sg)" stroke-width="3" stroke-linecap="round"/><g stroke="#8B2010" stroke-width="6" stroke-linecap="round" opacity="0.4"><line x1="256" y1="106" x2="256" y2="148"/><line x1="333" y1="179" x2="363" y2="149"/><line x1="365" y1="256" x2="407" y2="256"/><line x1="333" y1="333" x2="363" y2="363"/><line x1="256" y1="408" x2="256" y2="366"/><line x1="149" y1="363" x2="179" y2="333"/></g><circle cx="146" cy="223" r="8" fill="#FFFFFF"/><circle cx="144" cy="221" r="3" fill="#1C1C1C"/></svg> ClawFirm</a>
+  <div class="cf-nav-right">
+    <a href="https://clawfirm.dev" class="nav-lnk" data-zh="首页" data-en="Home">首页</a>
+    <a href="https://clawfirm.dev#features" class="nav-lnk" data-zh="核心能力" data-en="Features">核心能力</a>
+    <a href="#" class="nav-lnk active" data-zh="自媒体" data-en="Creator">自媒体</a>
+    <a href="https://github.com/npc-live/clawfirm" target="_blank" class="nav-lnk">GitHub</a>
+    <div class="lang-group">
+      <button data-lang="zh" class="lang-btn">中文</button>
+      <button data-lang="en" class="lang-btn">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">&#10022; Creator Economy</div>
+    <h1 data-zh="AI 自媒体工作台" data-en="AI Social Media Workstation">AI 自媒体工作台</h1>
+    <p class="hero-sub" data-zh="从选题策划到多平台发布，AI 驱动的全链路内容创作自动化引擎。让一个人拥有一支内容团队的战斗力。" data-en="From ideation to multi-platform publishing — an AI-powered, end-to-end content automation engine. One person, the firepower of a full content team.">从选题策划到多平台发布，AI 驱动的全链路内容创作自动化引擎。让一个人拥有一支内容团队的战斗力。</p>
+    <div class="hero-cta">
+      <a href="https://github.com/npc-live/clawfirm/releases/tag/latest" class="btn-p" target="_blank"><span data-zh="下载应用" data-en="Download">下载应用</span> &rarr;</a>
+      <a href="#cap" class="btn-g"><span data-zh="了解更多" data-en="Learn More">了解更多</span></a>
+    </div>
+    <div class="plat-strip">
+      <div class="plat-chip"><div class="pd" style="background:#1e1e1e;border:1px solid #666"></div> <span data-zh="抖音" data-en="Douyin">抖音</span></div>
+      <div class="plat-chip"><div class="pd" style="background:#ff2442"></div> <span data-zh="小红书" data-en="RedNote">小红书</span></div>
+      <div class="plat-chip"><div class="pd" style="background:#00a1d6"></div> <span data-zh="哔哩哔哩" data-en="Bilibili">哔哩哔哩</span></div>
+      <div class="plat-chip"><div class="pd" style="background:#1da1f2"></div> X / Twitter</div>
+      <div class="plat-chip"><div class="pd" style="background:#07c160"></div> <span data-zh="视频号" data-en="WeChat Channels">视频号</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>scroll</div>
+</section>
+
+<!-- ══════ CAPABILITIES ══════ -->
+<section id="cap" class="fade-in">
+  <div class="container">
+    <div class="sec-hd">
+      <p class="sl" data-zh="核心能力" data-en="Core Capabilities">核心能力</p>
+      <h2 class="sh" data-zh="8 大核心能力" data-en="8 Core Capabilities">8 大核心能力</h2>
+      <p class="sd" data-zh="覆盖自媒体运营全链路，每项能力均已在代码库中实现。" data-en="Covering the entire social media workflow. Every capability is implemented in the codebase.">覆盖自媒体运营全链路，每项能力均已在代码库中实现。</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cc">
+        <div class="ci" style="background:rgba(255,160,40,.15)">&#128293;</div>
+        <div class="ce">Viral Strategy</div>
+        <h3 data-zh="爆款策划" data-en="Viral Strategy">爆款策划</h3>
+        <p data-zh="6 大传播触发器 + 5 类标题公式 + Hook 开场模板，系统化爆款内容生产。" data-en="6 viral triggers + 5 headline formulas + hook templates — a systematic approach to creating viral content.">6 大传播触发器 + 5 类标题公式 + Hook 开场模板，系统化爆款内容生产。</p>
+        <div class="ct">viral-patterns + copywriting-base</div>
+      </div>
+      <div class="cc">
+        <div class="ci" style="background:rgba(38,136,249,.15)">&#9998;&#65039;</div>
+        <div class="ce">AI Copywriting</div>
+        <h3 data-zh="AI 文案生成" data-en="AI Copywriting">AI 文案生成</h3>
+        <p data-zh="为抖音、小红书、B站、X 四大平台生成定制风格文案，内置算法适配与审核规避策略。" data-en="Generate platform-tailored copy for Douyin, RedNote, Bilibili, and X — with built-in algorithm optimization and content compliance strategies.">为抖音、小红书、B站、X 四大平台生成定制风格文案，内置算法适配与审核规避策略。</p>
+        <div class="ct">social-publish/*</div>
+      </div>
+      <div class="cc">
+        <div class="ci" style="background:rgba(38,136,249,.10)">&#128444;&#65039;</div>
+        <div class="ce">AI Cover Generation</div>
+        <h3 data-zh="封面图生成" data-en="AI Cover Generation">封面图生成</h3>
+        <p data-zh="Gemini Image + OpenRouter 双引擎，输入 prompt 一键生成各平台尺寸封面。" data-en="Dual-engine (Gemini Image + OpenRouter) — generate platform-sized cover images from a single prompt.">Gemini Image + OpenRouter 双引擎，输入 prompt 一键生成各平台尺寸封面。</p>
+        <div class="ct">cmd/media-gen</div>
+      </div>
+      <div class="cc">
+        <div class="ci" style="background:rgba(120,60,200,.15)">&#127916;</div>
+        <div class="ce">Video Pipeline</div>
+        <h3 data-zh="短视频全链路" data-en="End-to-End Video">短视频全链路</h3>
+        <p data-zh="从脚本分镜到数字人口播、AI 场景生成、剪辑拼接，全流程自动化成片。" data-en="From storyboard to digital avatar narration, AI scene generation, and video stitching — fully automated production.">从脚本分镜到数字人口播、AI 场景生成、剪辑拼接，全流程自动化成片。</p>
+        <div class="ct">video-skills/*</div>
+      </div>
+      <div class="cc">
+        <div class="ci" style="background:rgba(38,136,249,.10)">&#128260;</div>
+        <div class="ce">Content Repurpose</div>
+        <h3 data-zh="内容一键多发" data-en="Content Repurpose">内容一键多发</h3>
+        <p data-zh="将公众号文章智能改写为各平台最佳格式，不是简单摘要，而是价值提炼。" data-en="Intelligently rewrite WeChat articles into platform-native formats — extracting value, not just summarizing.">将公众号文章智能改写为各平台最佳格式，不是简单摘要，而是价值提炼。</p>
+        <div class="ct">repurpose.whip</div>
+      </div>
+      <div class="cc">
+        <div class="ci" style="background:rgba(38,136,249,.15)">&#128433;</div>
+        <div class="ce">CDP Automation</div>
+        <h3 data-zh="浏览器自动操作" data-en="Browser Automation">浏览器自动操作</h3>
+        <p data-zh="基于 Chrome DevTools Protocol，支持搜索、点赞、评论、关注、下载、发布。" data-en="Built on Chrome DevTools Protocol — automate search, like, comment, follow, download, and publish.">基于 Chrome DevTools Protocol，支持搜索、点赞、评论、关注、下载、发布。</p>
+        <div class="ct">social-cli</div>
+      </div>
+      <div class="cc">
+        <div class="ci" style="background:rgba(255,160,40,.15)">&#128197;</div>
+        <div class="ce">Daily Automation</div>
+        <h3 data-zh="每日内容自动化" data-en="Daily Automation">每日内容自动化</h3>
+        <p data-zh="AI 创作草稿 + 合规审核 + 多平台并行发布，creator-validator 双 Agent 协作。" data-en="AI drafts content, validates compliance, and publishes in parallel — powered by dual creator-validator agents.">AI 创作草稿 + 合规审核 + 多平台并行发布，creator-validator 双 Agent 协作。</p>
+        <div class="ct">daily-content + daily-publish</div>
+      </div>
+      <div class="cc">
+        <div class="ci" style="background:rgba(120,60,200,.15)">&#128200;</div>
+        <div class="ce">Analytics &amp; Reports</div>
+        <h3 data-zh="数据分析与周报" data-en="Analytics &amp; Reports">数据分析与周报</h3>
+        <p data-zh="自动采集 7 天互动数据，提取爆款规律，生成可执行洞察与策略迭代建议。" data-en="Automatically collect 7-day engagement data, extract viral patterns, and generate actionable insights with strategy recommendations.">自动采集 7 天互动数据，提取爆款规律，生成可执行洞察与策略迭代建议。</p>
+        <div class="ct">analytics + weekly-report</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PIPELINE ══════ -->
+<section id="pipe" class="fade-in">
+  <div class="container">
+    <div class="sec-hd">
+      <p class="sl" data-zh="工作流自动化" data-en="Workflow Automation">工作流自动化</p>
+      <h2 class="sh" data-zh="两条核心 Pipeline" data-en="Two Core Pipelines">两条核心 Pipeline</h2>
+      <p class="sd" data-zh="WhipFlow 引擎驱动，多 Agent 协作，审核-发布闭环。" data-en="Powered by the WhipFlow engine — multi-agent collaboration with review-publish feedback loops.">WhipFlow 引擎驱动，多 Agent 协作，审核-发布闭环。</p>
+    </div>
+    <div class="pt">
+      <div class="pl">Content Pipeline</div>
+      <h3 data-zh="内容创作流水线" data-en="Content Creation Pipeline">内容创作流水线</h3>
+      <div class="ps">
+        <div class="pn">&#128293; <span data-zh="爆款选题" data-en="Viral Ideation">爆款选题</span></div><span class="pa">&rarr;</span>
+        <div class="pn">&#9998;&#65039; <span data-zh="AI 文案" data-en="AI Copy">AI 文案</span></div><span class="pa">&rarr;</span>
+        <div class="pn">&#9989; <span data-zh="合规审核" data-en="Compliance">合规审核</span></div><span class="pa">&rarr;</span>
+        <div class="pn">&#128444;&#65039; <span data-zh="封面生成" data-en="Cover Gen">封面生成</span></div><span class="pa">&rarr;</span>
+        <div class="pn">&#128640; <span data-zh="多平台发布" data-en="Multi-Publish">多平台发布</span></div>
+      </div>
+    </div>
+    <div class="pt vid">
+      <div class="pl">Video Pipeline</div>
+      <h3 data-zh="视频制作流水线" data-en="Video Production Pipeline">视频制作流水线</h3>
+      <div class="ps">
+        <div class="pn">&#128221; <span data-zh="脚本分镜" data-en="Storyboard">脚本分镜</span></div><span class="pa">&rarr;</span>
+        <div class="pn">&#129489; <span data-zh="数字人 / AI 视频" data-en="Avatar / AI Video">数字人 / AI 视频</span></div><span class="pa">&rarr;</span>
+        <div class="pn">&#127916; <span data-zh="剪辑拼接" data-en="Stitching">剪辑拼接</span></div><span class="pa">&rarr;</span>
+        <div class="pn">&#128250; <span data-zh="发布" data-en="Publish">发布</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PLATFORMS ══════ -->
+<section id="plat" class="fade-in">
+  <div class="container">
+    <div class="sec-hd">
+      <p class="sl" data-zh="平台支持" data-en="Platform Support">平台支持</p>
+      <h2 class="sh" data-zh="5 大平台自动化" data-en="5 Platforms Automated">5 大平台自动化</h2>
+      <p class="sd" data-zh="基于 CDP 的浏览器 Shortcut，覆盖主流社交平台的核心操作。" data-en="CDP-powered browser shortcuts covering core operations on every major social platform.">基于 CDP 的浏览器 Shortcut，覆盖主流社交平台的核心操作。</p>
+    </div>
+    <div class="tabs-row">
+      <button class="tb active" data-tab="xhs" data-zh="小红书" data-en="RedNote">小红书</button>
+      <button class="tb" data-tab="dy" data-zh="抖音" data-en="Douyin">抖音</button>
+      <button class="tb" data-tab="bl" data-zh="哔哩哔哩" data-en="Bilibili">哔哩哔哩</button>
+      <button class="tb" data-tab="x">X / Twitter</button>
+      <button class="tb" data-tab="ch" data-zh="视频号" data-en="Channels">视频号</button>
+    </div>
+    <!-- XHS -->
+    <div class="tp-panel active" id="p-xhs"><div class="cg">
+      <div class="ck"><div class="cki">&#128269;</div><div><h4>Search</h4><code>search</code><p data-zh="搜索笔记，返回标题、作者、链接" data-en="Search notes — returns title, author, link">搜索笔记，返回标题、作者、链接</p></div></div>
+      <div class="ck"><div class="cki">&#128293;</div><div><h4>Hot</h4><code>hot</code><p data-zh="获取探索页热门推荐笔记" data-en="Get trending notes from Explore page">获取探索页热门推荐笔记</p></div></div>
+      <div class="ck"><div class="cki">&#128077;</div><div><h4>Like</h4><code>like</code><p data-zh="点赞 / 取消点赞指定笔记" data-en="Like / unlike a specific note">点赞 / 取消点赞指定笔记</p></div></div>
+      <div class="ck"><div class="cki">&#128172;</div><div><h4>Comment</h4><code>comment</code><p data-zh="对指定笔记发表评论" data-en="Post a comment on a note">对指定笔记发表评论</p></div></div>
+      <div class="ck"><div class="cki">&#128249;</div><div><h4>Post Video</h4><code>post_video</code><p data-zh="上传视频 + 标题描述，自动发布" data-en="Upload video with title & desc, auto-publish">上传视频 + 标题描述，自动发布</p></div></div>
+      <div class="ck"><div class="cki">&#128221;</div><div><h4>Post</h4><code>post</code><p data-zh="发布图文笔记，含标题和正文" data-en="Publish image-text note with title & body">发布图文笔记，含标题和正文</p></div></div>
+    </div></div>
+    <!-- Douyin -->
+    <div class="tp-panel" id="p-dy"><div class="cg">
+      <div class="ck"><div class="cki">&#128269;</div><div><h4>Search</h4><code>search</code><p data-zh="搜索视频，返回链接和描述" data-en="Search videos — returns links and descriptions">搜索视频，返回链接和描述</p></div></div>
+      <div class="ck"><div class="cki">&#128077;</div><div><h4>Like</h4><code>like</code><p data-zh="点赞 / 取消点赞视频" data-en="Like / unlike a video">点赞 / 取消点赞视频</p></div></div>
+      <div class="ck"><div class="cki">&#128172;</div><div><h4>Comment</h4><code>comment</code><p data-zh="Draft.js 编辑器逐字符输入评论" data-en="Comment via Draft.js editor with per-char input">Draft.js 编辑器逐字符输入评论</p></div></div>
+      <div class="ck"><div class="cki">&#128100;</div><div><h4>Follow</h4><code>follow</code><p data-zh="从视频页一键关注作者" data-en="Follow the creator from the video page">从视频页一键关注作者</p></div></div>
+      <div class="ck"><div class="cki">&#128229;</div><div><h4>Download</h4><code>download</code><p data-zh="自动识别视频/图文，获取 CDN 下载" data-en="Auto-detect video/gallery, download via CDN">自动识别视频/图文，获取 CDN 下载</p></div></div>
+      <div class="ck"><div class="cki">&#128250;</div><div><h4>Post</h4><code>post</code><p data-zh="通过创作者平台上传发布视频" data-en="Upload & publish via Creator Platform">通过创作者平台上传发布视频</p></div></div>
+    </div></div>
+    <!-- Bilibili -->
+    <div class="tp-panel" id="p-bl"><div class="cg">
+      <div class="ck"><div class="cki">&#128269;</div><div><h4>Search</h4><code>search</code><p data-zh="搜索视频，返回链接、标题、UP主" data-en="Search videos — returns link, title, UP name">搜索视频，返回链接、标题、UP主</p></div></div>
+      <div class="ck"><div class="cki">&#128077;</div><div><h4>Like</h4><code>like</code><p data-zh="点赞 / 取消点赞视频" data-en="Like / unlike a video">点赞 / 取消点赞视频</p></div></div>
+      <div class="ck"><div class="cki">&#128100;</div><div><h4>Follow</h4><code>follow</code><p data-zh="从视频页关注 UP 主" data-en="Follow the UP from the video page">从视频页关注 UP 主</p></div></div>
+      <div class="ck"><div class="cki">&#128172;</div><div><h4>Comment</h4><code>comment</code><p data-zh="穿透 Shadow DOM 发表评论" data-en="Comment through Shadow DOM penetration">穿透 Shadow DOM 发表评论</p></div></div>
+      <div class="ck"><div class="cki">&#128488;</div><div><h4>Reply</h4><code>reply</code><p data-zh="回复评论，自动展开回复框" data-en="Reply to comments, auto-expand reply box">回复评论，自动展开回复框</p></div></div>
+      <div class="ck"><div class="cki">&#128250;</div><div><h4>Post</h4><code>post</code><p data-zh="通过创作中心投稿，自动关闭弹窗" data-en="Submit via Creator Center, auto-dismiss dialogs">通过创作中心投稿，自动关闭弹窗</p></div></div>
+    </div></div>
+    <!-- X -->
+    <div class="tp-panel" id="p-x"><div class="cg">
+      <div class="ck"><div class="cki">&#128269;</div><div><h4>Search</h4><code>search</code><p data-zh="搜索推文，按热度排序" data-en="Search tweets, sorted by popularity">搜索推文，按热度排序</p></div></div>
+      <div class="ck"><div class="cki">&#128077;</div><div><h4>Like</h4><code>like</code><p data-zh="点赞 / 取消点赞推文" data-en="Like / unlike a tweet">点赞 / 取消点赞推文</p></div></div>
+      <div class="ck"><div class="cki">&#128488;</div><div><h4>Reply</h4><code>reply</code><p data-zh="回复指定推文" data-en="Reply to a specific tweet">回复指定推文</p></div></div>
+      <div class="ck"><div class="cki">&#128221;</div><div><h4>Post</h4><code>post</code><p data-zh="发送纯文本推文" data-en="Post a text tweet">发送纯文本推文</p></div></div>
+      <div class="ck"><div class="cki">&#128260;</div><div><h4>Retweet</h4><code>retweet</code><p data-zh="转推指定推文" data-en="Retweet a specific tweet">转推指定推文</p></div></div>
+      <div class="ck"><div class="cki">&#128249;</div><div><h4>Post Video</h4><code>post_video</code><p data-zh="发推 + 上传视频附件" data-en="Tweet with video attachment">发推 + 上传视频附件</p></div></div>
+      <div class="ck"><div class="cki">&#128444;</div><div><h4>Post Media</h4><code>post_media</code><p data-zh="发推 + 上传图片或视频" data-en="Tweet with image or video">发推 + 上传图片或视频</p></div></div>
+    </div></div>
+    <!-- Channels -->
+    <div class="tp-panel" id="p-ch"><div class="cg">
+      <div class="ck"><div class="cki">&#128250;</div><div><h4>Post</h4><code>post</code><p data-zh="上传视频到视频号助手，自动填写标题描述并发布" data-en="Upload to Channels Assistant, auto-fill title & desc, publish">上传视频到视频号助手，自动填写标题描述并发布</p></div></div>
+      <div class="ck"><div class="cki">&#128203;</div><div><h4>List</h4><code>list</code><p data-zh="查看最近 10 条发布记录" data-en="View latest 10 published entries">查看最近 10 条发布记录</p></div></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ══════ VIRAL ══════ -->
+<section id="viral" class="fade-in">
+  <div class="container">
+    <div class="sec-hd">
+      <p class="sl" data-zh="爆款方法论" data-en="Viral Framework">爆款方法论</p>
+      <h2 class="sh" data-zh="6 大传播触发器" data-en="6 Viral Triggers">6 大传播触发器</h2>
+      <p class="sd" data-zh="基于传播学研究的系统化爆款方法论，内置于文案基座。" data-en="A systematic viral methodology grounded in communication science, built into the copywriting engine.">基于传播学研究的系统化爆款方法论，内置于文案基座。</p>
+    </div>
+    <div class="vg">
+      <div class="vc">
+        <div class="vn">01</div>
+        <h3 data-zh="社交货币" data-en="Social Currency">社交货币</h3>
+        <div class="ve">Social Currency</div>
+        <p data-zh="让转发者显得有品位、有见识。" data-en="Make sharers look knowledgeable and tasteful.">让转发者显得有品位、有见识。</p>
+        <ul>
+          <li data-zh='独家信息 — "很少人知道的..."' data-en='Insider info — "Few people know..."'>独家信息 — "很少人知道的..."</li>
+          <li data-zh="品味信号 — 体现审美和认知" data-en="Taste signal — showcasing aesthetics and insight">品味信号 — 体现审美和认知</li>
+          <li data-zh="成就展示 — 让用户晒出成果" data-en="Achievement display — let users show their results">成就展示 — 让用户晒出成果</li>
+        </ul>
+      </div>
+      <div class="vc">
+        <div class="vn">02</div>
+        <h3 data-zh="触发物" data-en="Triggers">触发物</h3>
+        <div class="ve">Triggers</div>
+        <p data-zh="与日常事物关联，反复被想起。" data-en="Associate with daily life, stay top of mind.">与日常事物关联，反复被想起。</p>
+        <ul>
+          <li data-zh='时间锚点 — "每天早上的第一件事"' data-en='Time anchors — "The first thing every morning"'>时间锚点 — "每天早上的第一件事"</li>
+          <li data-zh="场景关联 — 绑定高频场景" data-en="Scene association — bind to high-frequency scenarios">场景关联 — 绑定高频场景</li>
+          <li data-zh="热点借势 — 绑定当前热点" data-en="Trend-jacking — ride current hot topics">热点借势 — 绑定当前热点</li>
+        </ul>
+      </div>
+      <div class="vc">
+        <div class="vn">03</div>
+        <h3 data-zh="情绪驱动" data-en="Emotion">情绪驱动</h3>
+        <div class="ve">Emotion</div>
+        <p data-zh="高唤醒情绪驱动分享行为。" data-en="High-arousal emotions drive sharing behavior.">高唤醒情绪驱动分享行为。</p>
+        <ul>
+          <li data-zh="敬畏 / 惊叹 — 传播力最强" data-en="Awe / amazement — strongest virality">敬畏 / 惊叹 — 传播力最强</li>
+          <li data-zh="愤怒 / 不公 — 行业黑幕揭露" data-en="Anger / injustice — industry exposés">愤怒 / 不公 — 行业黑幕揭露</li>
+          <li data-zh="焦虑 / 恐惧 — 避坑指南" data-en="Anxiety / fear — pitfall-avoidance guides">焦虑 / 恐惧 — 避坑指南</li>
+        </ul>
+      </div>
+      <div class="vc">
+        <div class="vn">04</div>
+        <h3 data-zh="公开性" data-en="Public">公开性</h3>
+        <div class="ve">Public</div>
+        <p data-zh="让行为可见，触发模仿效应。" data-en="Make behavior visible, trigger imitation.">让行为可见，触发模仿效应。</p>
+        <ul>
+          <li data-zh='挑战赛 — "#30天打卡挑战"' data-en='Challenges — "#30DayChallenge"'>挑战赛 — "#30天打卡挑战"</li>
+          <li data-zh='晒单机制 — "晒出你的作品"' data-en='"Show yours" — user-generated showcases'>晒单机制 — "晒出你的作品"</li>
+          <li data-zh="模板分享 — 可填空的模板" data-en="Template sharing — fill-in-the-blank templates">模板分享 — 可填空的模板</li>
+        </ul>
+      </div>
+      <div class="vc">
+        <div class="vn">05</div>
+        <h3 data-zh="实用价值" data-en="Practical Value">实用价值</h3>
+        <div class="ve">Practical Value</div>
+        <p data-zh="有用的内容自然被收藏和转发。" data-en="Useful content naturally gets saved and shared.">有用的内容自然被收藏和转发。</p>
+        <ul>
+          <li data-zh='教程清单 — "以后用得上"' data-en='Tutorial checklists — "Save for later"'>教程清单 — "以后用得上"</li>
+          <li data-zh='工具测评 — "这个好用"' data-en='Tool reviews — "This one is great"'>工具测评 — "这个好用"</li>
+          <li data-zh='避坑经验 — "别人别踩坑"' data-en='Pitfall guides — "So others avoid this"'>避坑经验 — "别人别踩坑"</li>
+        </ul>
+      </div>
+      <div class="vc">
+        <div class="vn">06</div>
+        <h3 data-zh="故事性" data-en="Stories">故事性</h3>
+        <div class="ve">Stories</div>
+        <p data-zh="信息嵌入故事中随故事传播。" data-en="Information embedded in stories spreads with the story.">信息嵌入故事中随故事传播。</p>
+        <ul>
+          <li data-zh="叙事弧线 — 困境 → 转折 → 蜕变" data-en="Narrative arc — struggle → turning point → transformation">叙事弧线 — 困境 → 转折 → 蜕变</li>
+          <li data-zh="具体细节 — 时间、数字、场景" data-en="Specific details — time, numbers, setting">具体细节 — 时间、数字、场景</li>
+          <li data-zh="意外转折 — 出乎意料的结局" data-en="Plot twists — unexpected endings">意外转折 — 出乎意料的结局</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ VIDEO PIPELINE ══════ -->
+<section id="vid" class="fade-in">
+  <div class="container">
+    <div class="sec-hd">
+      <p class="sl" data-zh="视频制作" data-en="Video Production">视频制作</p>
+      <h2 class="sh" data-zh="视频制作流水线" data-en="Video Production Pipeline">视频制作流水线</h2>
+      <p class="sd" data-zh="从产品描述到成片的完整 Pipeline，支持三条并行路径。" data-en="A complete pipeline from product description to final cut, with three parallel tracks.">从产品描述到成片的完整 Pipeline，支持三条并行路径。</p>
+    </div>
+    <div class="vf">
+      <div class="fr"><div class="fn w"><h4>Step 1 &mdash; Script Generator</h4><p data-zh="脚本 + 分镜 (pain-solution / before-after / plot-twist)" data-en="Script + storyboard (pain-solution / before-after / plot-twist)">脚本 + 分镜 (pain-solution / before-after / plot-twist)</p></div></div>
+      <div class="fa">&darr;</div>
+      <div class="fr">
+        <div class="fn pu"><h4>Digital Avatar</h4><p data-zh="口播 / 表演" data-en="Narration / Acting">口播 / 表演</p><div class="br"><span class="mb mb-b">Kling</span><span class="mb mb-p">Jimeng</span><span class="mb mb-g">HeyGen</span></div></div>
+        <div class="fn"><h4>AI Scene Video</h4><p data-zh="纯 AI 场景生成" data-en="Pure AI scene generation">纯 AI 场景生成</p><div class="br"><span class="mb mb-b">Kling</span><span class="mb mb-g">Runway</span></div></div>
+        <div class="fn gr"><h4>Demo Recorder</h4><p data-zh="产品演示录屏" data-en="Product demo recording">产品演示录屏</p></div>
+      </div>
+      <div class="fa">&darr;</div>
+      <div class="fr"><div class="fn w"><h4>Step 3 &mdash; Video Stitcher</h4><p data-zh="视频拼接 + 转场 + BGM + 字幕 → 最终成片" data-en="Stitching + transitions + BGM + subtitles → final cut">视频拼接 + 转场 + BGM + 字幕 → 最终成片</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ QUICKSTART ══════ -->
+<section id="qs" class="fade-in">
+  <div class="container">
+    <div class="sec-hd">
+      <p class="sl" data-zh="快速开始" data-en="Get Started">快速开始</p>
+      <h2 class="sh" data-zh="5 分钟上手" data-en="Up and Running in 5 Minutes">5 分钟上手</h2>
+      <p class="sd" data-zh="从安装到自动发布，四步搞定。" data-en="From install to auto-publishing in four steps.">从安装到自动发布，四步搞定。</p>
+    </div>
+    <div class="sg">
+      <div class="sc"><div class="sn">01</div><h4 data-zh="安装 ClawFirm" data-en="Install ClawFirm">安装 ClawFirm</h4><p data-zh="全局安装并自动配置工具链" data-en="Install globally and auto-configure the toolchain">全局安装并自动配置工具链</p><div class="cb">npm install -g clawfirm &amp;&amp; clawfirm install</div></div>
+      <div class="sc"><div class="sn">02</div><h4 data-zh="配置账号" data-en="Configure Accounts">配置账号</h4><p data-zh="初始化社交媒体账号和 API 配置" data-en="Initialize social media accounts and API config">初始化社交媒体账号和 API 配置</p><div class="cb">clawfirm run social-media/setup.whip</div></div>
+      <div class="sc"><div class="sn">03</div><h4 data-zh="运行每日工作流" data-en="Run Daily Workflow">运行每日工作流</h4><p data-zh="AI 自动创作 + 审核 + 发布到全部平台" data-en="AI auto-creates, reviews, and publishes to all platforms">AI 自动创作 + 审核 + 发布到全部平台</p><div class="cb">clawfirm run social-media/daily-content.whip</div></div>
+      <div class="sc"><div class="sn">04</div><h4 data-zh="分析数据" data-en="Analyze Performance">分析数据</h4><p data-zh="采集数据、提取爆款规律、迭代策略" data-en="Collect data, extract viral patterns, iterate strategy">采集数据、提取爆款规律、迭代策略</p><div class="cb">clawfirm run social-media/analytics.whip</div></div>
+    </div>
+    <div class="terminal">
+      <div class="term-bar"><div class="td td-r"></div><div class="td td-y"></div><div class="td td-g"></div><div class="term-t">clawfirm &mdash; zsh</div></div>
+      <div class="term-b" id="tb">
+        <div class="tl" data-d="0"><span class="t-m"># Generate today's content with AI</span></div>
+        <div class="tl" data-d="400"><span class="t-p">$ </span><span class="t-c">clawfirm run social-media/daily-content.whip</span></div>
+        <div class="tl" data-d="1000"><span class="t-ok">&#10003; 5 drafts created, 5 approved</span></div>
+        <div class="tl" data-d="1600"><span class="t-m"># Publish to all platforms in parallel</span></div>
+        <div class="tl" data-d="2000"><span class="t-p">$ </span><span class="t-c">clawfirm run social-media/daily-publish.whip</span></div>
+        <div class="tl" data-d="2600"><span class="t-ok">&#10003; Published: Douyin, XHS, Bilibili, X, Channels</span></div>
+        <div class="tl" data-d="3200"><span class="t-m"># Analyze performance &amp; identify viral hits</span></div>
+        <div class="tl" data-d="3600"><span class="t-p">$ </span><span class="t-c">clawfirm run social-media/analytics.whip</span></div>
+        <div class="tl" data-d="4200"><span class="t-ok">&#10003; 3 viral hits identified, strategy updated</span></div>
+        <div class="tl" data-d="4600"><span class="t-p">$ </span><span class="cur"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER CTA ══════ -->
+<section class="cta-sec fade-in">
+  <div class="container">
+    <div class="cta-card">
+      <h2 data-zh="开始自动化你的内容创作" data-en="Start Automating Your Content">开始自动化你的内容创作</h2>
+      <p data-zh="从今天开始，让 AI 接管你的内容创作全流程。一个人，一支团队的战斗力。" data-en="Let AI take over your entire content workflow. One person, the firepower of a full team.">从今天开始，让 AI 接管你的内容创作全流程。一个人，一支团队的战斗力。</p>
+      <div class="cta-btns">
+        <a href="https://github.com/npc-live/clawfirm/releases/tag/latest" class="btn-p" target="_blank"><span data-zh="下载应用" data-en="Download">下载应用</span> &rarr;</a>
+        <a href="https://github.com/npc-live/clawfirm" class="btn-g" target="_blank"><span data-zh="查看完整文档 →" data-en="View Full Docs →">查看完整文档 →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>ClawFirm &copy; 2026</span>
+  <div class="fl">
+    <a href="https://github.com/npc-live/clawfirm" target="_blank">GitHub</a>
+    <a href="https://clawfirm.dev">Home</a>
+  </div>
+</footer>
+
+<script>
+// Tabs
+document.querySelectorAll('.tb').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tb').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.tp-panel').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('p-'+b.dataset.tab).classList.add('active');
+  });
+});
+// Scroll fade
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+// Terminal
+const to=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.tl').forEach(l=>{setTimeout(()=>l.classList.add('show'),+l.dataset.d)});to.unobserve(e.target)}})},{threshold:.3});
+to.observe(document.querySelector('.terminal'));
+</script>
+</body>
+</html>
