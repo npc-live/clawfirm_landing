@@ -66,6 +66,7 @@ export default function NavAuth() {
   return (
     <>
       <button
+        className="cf-auth-btn cf-auth-login"
         onClick={() => setModal("login")}
         style={{
           padding: "7px 18px",
@@ -78,11 +79,14 @@ export default function NavAuth() {
           fontWeight: 500,
           cursor: "pointer",
           letterSpacing: "0.04em",
+          whiteSpace: "nowrap",
+          flexShrink: 0,
         }}
       >
         Log In
       </button>
       <button
+        className="cf-auth-btn cf-auth-signup"
         onClick={() => setModal("register")}
         style={{
           padding: "7px 18px",
@@ -96,6 +100,8 @@ export default function NavAuth() {
           cursor: "pointer",
           letterSpacing: "0.04em",
           boxShadow: "0 2px 12px rgba(38,136,249,0.4)",
+          whiteSpace: "nowrap",
+          flexShrink: 0,
         }}
       >
         Sign Up

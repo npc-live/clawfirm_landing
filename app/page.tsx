@@ -148,11 +148,10 @@ export default function Home() {
       {/* ── Floating Nav ── */}
       <nav className="cf-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 48px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Playfair Display', Georgia, serif", fontSize: "22px", fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="ClawFirm" style={{ width: "52px", height: "52px", objectFit: "contain", borderRadius: "8px" }} />
-          ClawFirm
+          <svg className="cf-nav-icon" viewBox="0 0 512 512" width="36" height="36" aria-label="ClawFirm"><defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#FF6B5A"/><stop offset="30%" stopColor="#FF5A45"/><stop offset="100%" stopColor="#E13030"/></linearGradient><g id="sr"><line x1="256" y1="46" x2="256" y2="92" stroke="url(#sg)" strokeWidth="15" strokeLinecap="round"/><line x1="256" y1="164" x2="256" y2="206" stroke="url(#sg)" strokeWidth="15" strokeLinecap="round"/></g></defs>{[0,36,72,108,144,180,216,252,288,324].map(r=><use key={r} href="#sr" transform={`rotate(${r} 256 256)`}/>)}<path d="M 164 164 A 130 130 0 1 1 128 234" fill="none" stroke="url(#sg)" strokeWidth="52" strokeLinecap="round"/><g stroke="url(#sg)" strokeWidth="14" strokeLinecap="round"><line x1="164" y1="164" x2="120" y2="150"/><line x1="164" y1="164" x2="150" y2="120"/></g><path d="M 100 234 C 60 220, 50 160, 90 90" fill="none" stroke="url(#sg)" strokeWidth="5" strokeLinecap="round"/><path d="M 100 234 C 75 200, 100 130, 126 76" fill="none" stroke="url(#sg)" strokeWidth="3" strokeLinecap="round"/><g stroke="#8B2010" strokeWidth="6" strokeLinecap="round" opacity="0.4"><line x1="256" y1="106" x2="256" y2="148"/><line x1="333" y1="179" x2="363" y2="149"/><line x1="365" y1="256" x2="407" y2="256"/><line x1="333" y1="333" x2="363" y2="363"/><line x1="256" y1="408" x2="256" y2="366"/><line x1="149" y1="363" x2="179" y2="333"/></g><circle cx="146" cy="223" r="8" fill="#FFFFFF"/><circle cx="144" cy="221" r="3" fill="#1C1C1C"/></svg>
+          <span className="cf-nav-title">ClawFirm</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", flexShrink: 0 }}>
           {(["zh", "en"] as const).map((l) => (
             <button
               key={l}
@@ -393,8 +392,7 @@ export default function Home() {
       {/* ── Footer ── */}
       <footer style={{ position: "relative", zIndex: 1, padding: "40px 48px", borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
         <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "16px", fontWeight: 600, color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "8px" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="ClawFirm" style={{ width: "28px", height: "28px", objectFit: "contain" }} /> ClawFirm
+          <svg viewBox="0 0 512 512" width="24" height="24" aria-label="ClawFirm"><use href="#sg"/><use href="#sr"/>{[0,36,72,108,144,180,216,252,288,324].map(r=><use key={r} href="#sr" transform={`rotate(${r} 256 256)`}/>)}<path d="M 164 164 A 130 130 0 1 1 128 234" fill="none" stroke="url(#sg)" strokeWidth="52" strokeLinecap="round"/><g stroke="url(#sg)" strokeWidth="14" strokeLinecap="round"><line x1="164" y1="164" x2="120" y2="150"/><line x1="164" y1="164" x2="150" y2="120"/></g><path d="M 100 234 C 60 220, 50 160, 90 90" fill="none" stroke="url(#sg)" strokeWidth="5" strokeLinecap="round"/><path d="M 100 234 C 75 200, 100 130, 126 76" fill="none" stroke="url(#sg)" strokeWidth="3" strokeLinecap="round"/><g stroke="#8B2010" strokeWidth="6" strokeLinecap="round" opacity="0.4"><line x1="256" y1="106" x2="256" y2="148"/><line x1="333" y1="179" x2="363" y2="149"/><line x1="365" y1="256" x2="407" y2="256"/><line x1="333" y1="333" x2="363" y2="363"/><line x1="256" y1="408" x2="256" y2="366"/><line x1="149" y1="363" x2="179" y2="333"/></g><circle cx="146" cy="223" r="8" fill="#FFFFFF"/><circle cx="144" cy="221" r="3" fill="#1C1C1C"/></svg> ClawFirm
         </div>
         <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", color: "var(--text-ghost)", letterSpacing: "0.02em" }}>
           © 2025 ClawFirm · <T zh={t.footer} en={en.footer} />
@@ -418,7 +416,23 @@ export default function Home() {
         /* ── Mobile (≤ 680px) ── */
         @media (max-width: 680px) {
           .cf-nav {
-            padding: 16px 20px !important;
+            padding: 12px 16px !important;
+            gap: 8px !important;
+          }
+          .cf-nav-icon {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .cf-nav-title {
+            font-size: 18px !important;
+          }
+          .cf-nav .lang-btn {
+            padding: 4px 10px !important;
+            font-size: 12px !important;
+          }
+          .cf-auth-btn {
+            padding: 5px 12px !important;
+            font-size: 12px !important;
           }
           .cf-hero-content {
             padding: 100px 20px 0 !important;
@@ -466,7 +480,23 @@ export default function Home() {
         /* ── Small mobile (≤ 400px) ── */
         @media (max-width: 400px) {
           .cf-nav {
-            padding: 14px 16px !important;
+            padding: 10px 12px !important;
+            gap: 6px !important;
+          }
+          .cf-nav-icon {
+            width: 24px !important;
+            height: 24px !important;
+          }
+          .cf-nav-title {
+            display: none !important;
+          }
+          .cf-nav .lang-btn {
+            padding: 3px 8px !important;
+            font-size: 11px !important;
+          }
+          .cf-auth-btn {
+            padding: 4px 10px !important;
+            font-size: 11px !important;
           }
           .cf-cta-card {
             padding: 40px 20px !important;
