@@ -128,7 +128,7 @@ const i18nScript = `
 import NavAuth from "./components/NavAuth";
 
 function T({ zh: z, en: e }: { zh: string; en: string }) {
-  return <span data-zh={z} data-en={e}>{e}</span>;
+  return <span data-zh={z} data-en={e} suppressHydrationWarning>{e}</span>;
 }
 
 export default function Home() {
@@ -151,12 +151,18 @@ export default function Home() {
           <svg className="cf-nav-icon" viewBox="0 0 512 512" width="36" height="36" aria-label="ClawFirm"><defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#FF6B5A"/><stop offset="30%" stopColor="#FF5A45"/><stop offset="100%" stopColor="#E13030"/></linearGradient><g id="sr"><line x1="256" y1="46" x2="256" y2="92" stroke="url(#sg)" strokeWidth="15" strokeLinecap="round"/><line x1="256" y1="164" x2="256" y2="206" stroke="url(#sg)" strokeWidth="15" strokeLinecap="round"/></g></defs>{[0,36,72,108,144,180,216,252,288,324].map(r=><use key={r} href="#sr" transform={`rotate(${r} 256 256)`}/>)}<path d="M 164 164 A 130 130 0 1 1 128 234" fill="none" stroke="url(#sg)" strokeWidth="52" strokeLinecap="round"/><g stroke="url(#sg)" strokeWidth="14" strokeLinecap="round"><line x1="164" y1="164" x2="120" y2="150"/><line x1="164" y1="164" x2="150" y2="120"/></g><path d="M 100 234 C 60 220, 50 160, 90 90" fill="none" stroke="url(#sg)" strokeWidth="5" strokeLinecap="round"/><path d="M 100 234 C 75 200, 100 130, 126 76" fill="none" stroke="url(#sg)" strokeWidth="3" strokeLinecap="round"/><g stroke="#8B2010" strokeWidth="6" strokeLinecap="round" opacity="0.4"><line x1="256" y1="106" x2="256" y2="148"/><line x1="333" y1="179" x2="363" y2="149"/><line x1="365" y1="256" x2="407" y2="256"/><line x1="333" y1="333" x2="363" y2="363"/><line x1="256" y1="408" x2="256" y2="366"/><line x1="149" y1="363" x2="179" y2="333"/></g><circle cx="146" cy="223" r="8" fill="#FFFFFF"/><circle cx="144" cy="221" r="3" fill="#1C1C1C"/></svg>
           <span className="cf-nav-title">ClawFirm</span>
         </div>
+        <div className="cf-nav-links" style={{ display: "flex", alignItems: "center", gap: "24px", fontFamily: "Inter, system-ui, sans-serif", fontSize: "14px", fontWeight: 500 }}>
+          <a href="#features" style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}><T zh="核心能力" en="Features" /></a>
+          <a href="/social-media.html" style={{ color: "var(--accent)", textDecoration: "none", transition: "color 0.2s" }}><T zh="自媒体" en="Creator" /></a>
+          <a href="https://github.com/npc-live/clawfirm" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}>GitHub</a>
+        </div>
         <div style={{ display: "flex", alignItems: "center", gap: "12px", flexShrink: 0 }}>
           {(["zh", "en"] as const).map((l) => (
             <button
               key={l}
               data-lang={l}
               className="lang-btn"
+              suppressHydrationWarning
               style={{ padding: "6px 16px", borderRadius: "100px", border: "1px solid transparent", background: "transparent", color: "var(--text-muted)", fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", fontWeight: 500, cursor: "pointer", transition: "all 0.2s", letterSpacing: "0.04em" }}
             >
               {l === "zh" ? "中文" : "EN"}
@@ -224,10 +230,10 @@ export default function Home() {
         </div>
         <div className="cf-features-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "2px", maxWidth: "1100px", margin: "0 auto", border: "1px solid var(--border-default)", borderRadius: "24px", overflow: "hidden" }}>
           {([
-            { icon: "🚀", zh: t.f1Title, en: en.f1Title, descZh: t.f1Desc, descEn: en.f1Desc, accent: "rgba(38,136,249,0.15)" },
-            { icon: "📈", zh: t.f2Title, en: en.f2Title, descZh: t.f2Desc, descEn: en.f2Desc, accent: "rgba(120,60,200,0.15)" },
-            { icon: "🌐", zh: t.f3Title, en: en.f3Title, descZh: t.f3Desc, descEn: en.f3Desc, accent: "rgba(38,136,249,0.10)" },
-            { icon: "🛒", zh: t.f4Title, en: en.f4Title, descZh: t.f4Desc, descEn: en.f4Desc, accent: "rgba(255,160,40,0.15)" },
+            { icon: "🚀", zh: t.f1Title, en: en.f1Title, descZh: t.f1Desc, descEn: en.f1Desc, accent: "rgba(38,136,249,0.15)", href: undefined },
+            { icon: "📈", zh: t.f2Title, en: en.f2Title, descZh: t.f2Desc, descEn: en.f2Desc, accent: "rgba(120,60,200,0.15)", href: undefined },
+            { icon: "🌐", zh: t.f3Title, en: en.f3Title, descZh: t.f3Desc, descEn: en.f3Desc, accent: "rgba(38,136,249,0.10)", href: "/social-media.html" },
+            { icon: "🛒", zh: t.f4Title, en: en.f4Title, descZh: t.f4Desc, descEn: en.f4Desc, accent: "rgba(255,160,40,0.15)", href: undefined },
           ] as const).map((f) => (
             <div key={f.icon} style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", padding: "44px 36px", display: "flex", flexDirection: "column", gap: "16px", borderRight: "1px solid var(--border-subtle)" }}>
               <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: f.accent, border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>{f.icon}</div>
@@ -237,6 +243,11 @@ export default function Home() {
               <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "15px", lineHeight: 1.75, color: "var(--text-secondary)" }}>
                 <T zh={f.descZh} en={f.descEn} />
               </p>
+              {f.href && (
+                <a href={f.href} style={{ marginTop: "auto", fontFamily: "Inter, system-ui, sans-serif", fontSize: "13px", fontWeight: 600, color: "var(--accent)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px", transition: "gap 0.2s" }} className="cf-card-link">
+                  <T zh="了解更多" en="Learn More" /> <span style={{ transition: "transform 0.2s" }}>&rarr;</span>
+                </a>
+              )}
             </div>
           ))}
         </div>
@@ -405,6 +416,9 @@ export default function Home() {
           50%       { transform: translateX(-50%) translateY(8px); }
         }
         .lang-btn:hover { opacity: 0.85; }
+        .cf-nav-links a:hover { color: var(--text-primary) !important; }
+        .cf-nav-links a[href="/social-media.html"]:hover { color: var(--accent) !important; opacity: 0.85; }
+        .cf-card-link:hover span { transform: translateX(3px); }
 
         /* ── Tablet (≤ 900px) ── */
         @media (max-width: 900px) {
@@ -425,6 +439,10 @@ export default function Home() {
           }
           .cf-nav-title {
             font-size: 18px !important;
+          }
+          .cf-nav-links {
+            gap: 16px !important;
+            font-size: 13px !important;
           }
           .cf-nav .lang-btn {
             padding: 4px 10px !important;
@@ -488,6 +506,9 @@ export default function Home() {
             height: 24px !important;
           }
           .cf-nav-title {
+            display: none !important;
+          }
+          .cf-nav-links {
             display: none !important;
           }
           .cf-nav .lang-btn {
