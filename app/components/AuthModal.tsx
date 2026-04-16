@@ -177,12 +177,7 @@ export default function AuthModal({
 
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: "24px" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo.png"
-            alt="ClawFirm"
-            style={{ width: "48px", height: "48px", objectFit: "contain", borderRadius: "8px", margin: "0 auto 8px" }}
-          />
+          <svg viewBox="0 0 512 512" width="48" height="48" style={{ margin: "0 auto 8px", display: "block" }} aria-label="ClawFirm"><defs><linearGradient id="asg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#FF6B5A"/><stop offset="30%" stopColor="#FF5A45"/><stop offset="100%" stopColor="#E13030"/></linearGradient><g id="asr"><line x1="256" y1="46" x2="256" y2="92" stroke="url(#asg)" strokeWidth="15" strokeLinecap="round"/><line x1="256" y1="164" x2="256" y2="206" stroke="url(#asg)" strokeWidth="15" strokeLinecap="round"/></g></defs>{[0,36,72,108,144,180,216,252,288,324].map(r=><use key={r} href="#asr" transform={`rotate(${r} 256 256)`}/>)}<path d="M 164 164 A 130 130 0 1 1 128 234" fill="none" stroke="url(#asg)" strokeWidth="52" strokeLinecap="round"/><g stroke="url(#asg)" strokeWidth="14" strokeLinecap="round"><line x1="164" y1="164" x2="120" y2="150"/><line x1="164" y1="164" x2="150" y2="120"/></g><path d="M 100 234 C 60 220, 50 160, 90 90" fill="none" stroke="url(#asg)" strokeWidth="5" strokeLinecap="round"/><path d="M 100 234 C 75 200, 100 130, 126 76" fill="none" stroke="url(#asg)" strokeWidth="3" strokeLinecap="round"/><g stroke="#8B2010" strokeWidth="6" strokeLinecap="round" opacity="0.4"><line x1="256" y1="106" x2="256" y2="148"/><line x1="333" y1="179" x2="363" y2="149"/><line x1="365" y1="256" x2="407" y2="256"/><line x1="333" y1="333" x2="363" y2="363"/><line x1="256" y1="408" x2="256" y2="366"/><line x1="149" y1="363" x2="179" y2="333"/></g><circle cx="146" cy="223" r="8" fill="#FFFFFF"/><circle cx="144" cy="221" r="3" fill="#1C1C1C"/></svg>
           <h2
             style={{
               fontFamily: "'Playfair Display', Georgia, serif",
